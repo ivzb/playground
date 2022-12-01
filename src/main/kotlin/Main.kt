@@ -1,4 +1,5 @@
 fun main() {
-    val task01 = Task01().run()
-    println(task01)
+    val task = Task02
+    println(task.partOne())
+    println(task.partTwo())
 }
