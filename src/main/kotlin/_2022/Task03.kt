@@ -4,30 +4,22 @@ import readInput
 
 object Task03 {
 
+    private val priority = ('a'..'z') + ('A'..'Z')
+
+    // 7997
     fun partOne() = parseInput()
         .map { it.chunked(it.length / 2) }
-        .sumOf { (compartment1, compartment2) ->
-            compartment1.toSet()
-                .intersect(compartment2.toSet())
-                .sumOf { priority(it) }
-        }
+        .sumOf { sumPriority(it) }
 
+    // 2545
     fun partTwo() = parseInput()
         .chunked(3)
-        .sumOf { (rucksack1, rucksack2, rucksack3) ->
-            rucksack1.toSet()
-                .intersect(rucksack2.toSet())
-                .intersect(rucksack3.toSet())
-                .sumOf { priority(it) }
-        }
+        .sumOf { sumPriority(it) }
 
-    private fun priority(it: Char): Int {
-        return if (it.isUpperCase()) {
-            it - 'A' + 27
-        } else {
-            it - 'a' + 1
-        }
-    }
+    private fun sumPriority(it: List<String>): Int = it
+        .map { it.toSet() }
+        .reduce { left, right -> left intersect right }
+        .sumOf { priority.indexOf(it) + 1 }
 
     private fun parseInput() = readInput("_2022/03").split("\n")
 
