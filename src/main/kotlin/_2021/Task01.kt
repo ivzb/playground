@@ -1,15 +1,42 @@
-package _2022
+package _2021
 
 import readInput
 
 object Task01 {
 
-    fun partOne() = parseInput().maxOf { it }.toString()
+    private data class Measurement(val value: Int, val level: Level)
 
-    fun partTwo() = parseInput().sortedDescending().take(3).sum().toString()
+    private enum class Level {
+        NA,
+        DECREASED,
+        INCREASED,
+        NO_CHANGE
+    }
 
-    private fun parseInput() = readInput("01")
-        .split("\n\n")
-        .map { it.split("\n").sumOf { it.toInt() } }
+    fun partOne() = parseInput()
+        .countIncreasedLevel()
+
+    fun partTwo() = parseInput()
+        .windowed(size = 3, step = 1) { it.sum() }
+        .countIncreasedLevel()
+
+    private fun List<Int>.countIncreasedLevel(): Int =
+        fold(ArrayList<Measurement>()) { measurements, it ->
+            val last = measurements.lastOrNull()
+            val level = when {
+                last == null -> Level.NA
+                it > last.value -> Level.INCREASED
+                it < last.value -> Level.DECREASED
+                else -> Level.NO_CHANGE
+            }
+
+            measurements.add(Measurement(it, level))
+            measurements
+        }
+        .count { it.level == Level.INCREASED }
+
+    private fun parseInput() = readInput("_2021/01")
+        .split("\n")
+        .map { it.toInt() }
 
 }
