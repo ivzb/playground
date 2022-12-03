@@ -1,3 +1,7 @@
+package _2022
+
+import readInput
+
 object Task02 {
 
     private const val LOSE = 0
@@ -36,6 +40,6 @@ object Task02 {
 
     fun partTwo() = parseInput().sumOf { strategyTwo[it] ?: 0 }
 
-    private fun parseInput() = readInput("02").split("\n")
+    private fun parseInput() = readInput("_2022/02").split("\n")
 
 }

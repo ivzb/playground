@@ -1,3 +1,7 @@
+package _2022
+
+import readInput
+
 object Task03 {
 
     fun partOne() = parseInput()
@@ -25,6 +29,6 @@ object Task03 {
         }
     }
 
-    private fun parseInput() = readInput("03").split("\n")
+    private fun parseInput() = readInput("_2022/03").split("\n")
 
 }
