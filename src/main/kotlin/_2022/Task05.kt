@@ -45,7 +45,6 @@ object Task05 {
         .flatten()
         .groupBy { (index) -> index }
         .map { (index, list) -> index to LinkedList(list.map { (_, char) -> char.toString() }) }
-        .toList()
         .toMap()
 
     private fun parseInstructions(input: String): List<List<Int>> = input
