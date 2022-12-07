@@ -1,19 +1,20 @@
 package _2022
 
+import Task
 import readInput
 
-object Task07 {
+object Task07 : Task {
 
     private const val MAX_SPACE = 100_000
     private const val NEEDED_SPACE = 30_000_000
     private const val TOTAL_SPACE = 70_000_000
 
-    fun partOne() = buildFilesystem().root.flatten()
+    override fun partA() = buildFilesystem().root.flatten()
         .map { it.space() }
         .filter { space -> space <= MAX_SPACE }
         .sum()
 
-    fun partTwo() = buildFilesystem().let { fs ->
+    override fun partB() = buildFilesystem().let { fs ->
         fs.root.flatten()
             .map { it.space() }
             .sorted()

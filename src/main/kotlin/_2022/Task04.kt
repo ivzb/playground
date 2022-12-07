@@ -1,16 +1,15 @@
 package _2022
 
+import Task
 import readInput
 
-object Task04 {
+object Task04 : Task {
 
-    // 466
-    fun partOne() = parseInput()
+    override fun partA() = parseInput()
         .map { (left, right) -> left.containsAll(right) || right.containsAll(left) }
         .count { it }
 
-    // 865
-    fun partTwo() = parseInput()
+    override fun partB() = parseInput()
         .map { (left, right) -> left.intersect(right).isNotEmpty() }
         .count { it }
 

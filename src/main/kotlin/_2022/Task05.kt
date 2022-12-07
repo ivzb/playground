@@ -1,11 +1,12 @@
 package _2022
 
+import Task
 import readInput
 import java.util.*
 
-object Task05 {
+object Task05 : Task {
 
-    fun partOne() = parseInput().let { (stacks, instructions) ->
+    override fun partA() = parseInput().let { (stacks, instructions) ->
         instructions.forEach { (move, from, to) ->
             repeat(move) { stacks[to]?.push(stacks[from]?.pop()) }
         }
@@ -13,7 +14,7 @@ object Task05 {
         findTopCrates(stacks)
     }
 
-    fun partTwo() = parseInput().let { (stacks, instructions) ->
+    override fun partB() = parseInput().let { (stacks, instructions) ->
         instructions.forEach { (move, from, to) ->
             val temp = LinkedList<String>()
             repeat(move) { temp.push(stacks[from]?.pop()) }

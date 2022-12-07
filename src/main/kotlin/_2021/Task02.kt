@@ -1,12 +1,13 @@
 package _2021
 
+import Task
 import readInput
 
-object Task02 {
+object Task02 : Task {
 
     data class Position(var horizontal: Int, var depth: Int, var aim: Int)
 
-    fun partOne() = parseInput()
+    override fun partA() = parseInput()
         .fold(Position(horizontal = 0, depth = 0, aim = 0)) { position, (command, value) ->
             position.apply {
                 when (command) {
@@ -20,7 +21,7 @@ object Task02 {
             it.horizontal * it.depth
         }
 
-    fun partTwo() = parseInput()
+    override fun partB() = parseInput()
         .fold(Position(horizontal = 0, depth = 0, aim = 0)) { position, (command, value) ->
             position.apply {
                 when (command) {

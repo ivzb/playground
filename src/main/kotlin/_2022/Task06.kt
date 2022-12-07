@@ -1,15 +1,16 @@
 package _2022
 
+import Task
 import readInput
 
-object Task06 {
+object Task06 : Task {
 
     private const val startOfPacketSize = 4
     private const val startOfMessageSize = 14
 
-    fun partOne() = findMarker(startOfPacketSize)
+    override fun partA() = findMarker(startOfPacketSize)
 
-    fun partTwo() = findMarker(startOfMessageSize)
+    override fun partB() = findMarker(startOfMessageSize)
 
     private fun findMarker(size: Int): Int {
         return parseInput()

@@ -1,14 +1,15 @@
 package _2021
 
+import Task
 import readInput
 
-object Task01 {
+object Task01 : Task {
 
-    fun partOne() = parseInput()
+    override fun partA() = parseInput()
         .zipWithNext()
         .count { it.first < it.second }
 
-    fun partTwo() = parseInput()
+    override fun partB() = parseInput()
         .windowed(size = 3, step = 1) { it.sum() }
         .zipWithNext()
         .count { it.first < it.second }

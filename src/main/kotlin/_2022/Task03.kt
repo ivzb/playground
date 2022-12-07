@@ -1,18 +1,17 @@
 package _2022
 
+import Task
 import readInput
 
-object Task03 {
+object Task03 : Task {
 
     private val priority = ('a'..'z') + ('A'..'Z')
 
-    // 7997
-    fun partOne() = parseInput()
+    override fun partA() = parseInput()
         .map { it.chunked(it.length / 2) }
         .sumOf { sumPriority(it) }
 
-    // 2545
-    fun partTwo() = parseInput()
+    override fun partB() = parseInput()
         .chunked(3)
         .sumOf { sumPriority(it) }
 

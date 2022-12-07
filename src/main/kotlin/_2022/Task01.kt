@@ -1,12 +1,13 @@
 package _2022
 
+import Task
 import readInput
 
-object Task01 {
+object Task01: Task {
 
-    fun partOne() = parseInput().maxOf { it }.toString()
+    override fun partA() = parseInput().maxOf { it }
 
-    fun partTwo() = parseInput().sortedDescending().take(3).sum().toString()
+    override fun partB() = parseInput().sortedDescending().take(3).sum()
 
     private fun parseInput() = readInput("_2022/01")
         .split("\n\n")

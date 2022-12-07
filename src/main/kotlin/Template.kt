@@ -1,12 +1,12 @@
-object Template {
+object Template : Task {
 
-    fun partOne() = parseInput().map {
+    override fun partA() = parseInput().map {
 
         val b = 5
         ""
     }
 
-    fun partTwo() = parseInput().map {
+    override fun partB() = parseInput().map {
 
         val b = 5
         ""
