@@ -8,40 +8,38 @@ typealias Grid = List<List<Int>>
 
 object Task08 : Task {
 
-    override fun partA(): Int = iterate(parseInput()) { grid, acc, i, j, treeHeight ->
-        val visibleTrees = neighbours(grid, i, j)
+    override fun partA(): Int = traverseFold(parseInput()) { totalVisibleTrees, neighbours, treeHeight ->
+        neighbours
             .map { neighbour -> neighbour.isEmpty() || treeHeight > neighbour.max() }
             .distinct()
             .count { isVisible -> isVisible }
-
-        acc + visibleTrees
+            .let { currentVisibleTrees -> totalVisibleTrees + currentVisibleTrees }
     }
 
-    override fun partB() = iterate(parseInput()) { grid, acc, i, j, _ ->
-        val scenicScore = neighbours(grid, i, j)
-            .map { neighbour -> neighbour.takeWhileInclusive { grid[i][j] > it }.count() }
-            .reduce { score, viewingDistance -> score * viewingDistance }
-
-        max(acc, scenicScore)
+    override fun partB() = traverseFold(parseInput()) { maxScore, neighbours, treeHeight ->
+        neighbours
+            .map { neighbour -> neighbour.takeWhileInclusive { treeHeight > it }.count() }
+            .reduce { scenicScore, viewingDistance -> scenicScore * viewingDistance }
+            .let { currencyScore -> max(maxScore, currencyScore) }
     }
 
     private fun parseInput() = readInput("_2022/08")
         .split('\n')
         .map { it.map { it.digitToInt() } }
 
-    private fun iterate(grid: Grid, operation: (Grid, Int, Int, Int, Int) -> Int): Int = grid
-        .mapIndexed { i, row -> row.mapIndexed { j, current -> (i to j) to current } }
+    private fun traverseFold(grid: Grid, operation: (Int, Grid, Int) -> Int): Int = grid
+        .mapIndexed { i, row -> row.mapIndexed { j, treeHeight -> (i to j) to treeHeight } }
         .flatten()
-        .fold(0) { acc, (position, treeHeight) ->
+        .fold(0) { total, (position, treeHeight) ->
             val (i, j) = position
-            operation(grid, acc, i, j, treeHeight)
+            operation(total, neighbours(grid, i, j), treeHeight)
         }
 
     private fun neighbours(grid: List<List<Int>>, i: Int, j: Int) = listOf(
-        grid.subList(0, i).map { it[j] }.reversed(),
-        grid[i].subList(j + 1, grid[i].size),
-        grid.subList(i + 1, grid.size).map { it[j] },
-        grid[i].subList(0, j).reversed(),
+        grid.slice(0 until i).map { it[j] }.reversed(), // top
+        grid[i].slice(j + 1 until grid[j].size), // right
+        grid.slice(i + 1 until grid.size).map { it[j] }, // bottom
+        grid[i].slice(0 until j).reversed(), // left
     )
 
     private fun <T> List<T>.takeWhileInclusive(predicate: (T) -> Boolean) = sequence {
