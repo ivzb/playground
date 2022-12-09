@@ -1,7 +1,5 @@
-import _2022.Task08
-
 fun main() {
-    val task = Task08
+    val task = _2022.Task09
     println("partA = ${task.partA()}")
     println("partB = ${task.partB()}")
 }
