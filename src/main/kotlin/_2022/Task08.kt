@@ -2,6 +2,7 @@ package _2022
 
 import Task
 import readInput
+import utils.Matrix.adjacentRowsAndCols
 import java.lang.Integer.max
 
 typealias Grid = List<List<Int>>
@@ -11,8 +12,8 @@ object Task08 : Task {
     override fun partA(): Int = traverseFold(parseInput()) { totalVisibleTrees, neighbours, treeHeight ->
         neighbours
             .map { neighbour -> neighbour.isEmpty() || treeHeight > neighbour.max() }
-            .distinct()
             .count { isVisible -> isVisible }
+            .coerceAtMost(1)
             .let { currentVisibleTrees -> totalVisibleTrees + currentVisibleTrees }
     }
 
@@ -32,15 +33,9 @@ object Task08 : Task {
         .flatten()
         .fold(0) { total, (position, treeHeight) ->
             val (i, j) = position
-            operation(total, neighbours(grid, i, j), treeHeight)
+            val neighbours = adjacentRowsAndCols(grid, i, j)
+            operation(total, neighbours, treeHeight)
         }
-
-    private fun neighbours(grid: List<List<Int>>, i: Int, j: Int) = listOf(
-        grid.slice(0 until i).map { it[j] }.reversed(), // top
-        grid[i].slice(j + 1 until grid[j].size), // right
-        grid.slice(i + 1 until grid.size).map { it[j] }, // bottom
-        grid[i].slice(0 until j).reversed(), // left
-    )
 
     private fun <T> List<T>.takeWhileInclusive(predicate: (T) -> Boolean) = sequence {
         this@takeWhileInclusive.takeWhile { predicate(it) }.forEach { yield(it) }
