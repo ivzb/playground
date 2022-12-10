@@ -2,122 +2,64 @@ package _2022
 
 import Task
 import readInput
-import java.lang.Exception
-import java.lang.StringBuilder
 
 object Task10 : Task {
 
-    var lastX = 1
-    var lastSprite = ""
-    var lastIndex = 0
-    var cycles = HashMap<Int, Int>()
-    var pixels = HashMap<Int, String>()
+    private const val REGISTER = 1
+    private const val PIXELS = ""
+    private const val PIXEL_LIT = '#'
+    private const val PIXEL_DARK = '.'
+    private const val PIXELS_START = 19
+    private const val PIXELS_STEP = 40
+    private val SIGNALS = listOf<Int>()
 
     override fun partA() = parseInput()
-        .also {
-            lastX = 1
-            lastIndex = 0
-            cycles = HashMap()
+        .fold(REGISTER to SIGNALS) { (register, signals), instruction ->
+            (register + instruction) to signal(instruction, signals, register)
         }
-        .map {
-            when (it[0]) {
-                "noop" -> {
-                    lastIndex += 1
-                    cycles[lastIndex] = lastX
-                }
-
-                "addx" -> {
-                    val add = it[1].toInt()
-                    lastIndex += 1
-                    cycles[lastIndex] = lastX
-
-                    lastIndex += 1
-                    lastX += add
-                    cycles[lastIndex] = lastX
-                }
-            }
-        }
-        .let {
-            var sum = 0
-            sum += 20 * cycles[19]!!
-            sum += 60 * cycles[59]!!
-            sum += 100 * cycles[99]!!
-            sum += 140 * cycles[139]!!
-            sum += 180 * cycles[179]!!
-            sum += 220 * cycles[219]!!
-            sum
-        }
+        .let { (_, signals) -> signals }
+        .drop(PIXELS_START)
+        .windowed(1, PIXELS_STEP)
+        .flatten()
+        .sum()
 
     override fun partB() = parseInput()
-        .also {
-            lastX = 1
-            lastIndex = 0
-            cycles = HashMap()
+        .fold(REGISTER to PIXELS) { (register, pixels), instruction ->
+            (register + instruction) to drawPixel(instruction, pixels, register)
         }
-        .map {
-            when (it[0]) {
-                "noop" -> {
-                    if (lastIndex % 40 == 0) {
-                        lastSprite = ""
-                    }
-
-                    lastIndex += 1
-                    cycles[lastIndex] = lastX
-
-                    lastSprite += draw(lastIndex, lastX)
-                    pixels[lastIndex] = lastSprite
-                }
-
-                "addx" -> {
-                    if (lastIndex % 40 == 0) {
-                        lastSprite = ""
-                    }
-
-                    val add = it[1].toInt()
-                    lastIndex += 1
-                    cycles[lastIndex] = lastX
-
-                    lastSprite += draw(lastIndex, lastX)
-                    pixels[lastIndex] = lastSprite
-
-                    if (lastIndex % 40 == 0) {
-                        lastSprite = ""
-                    }
-
-
-                    lastIndex += 1
-                    lastSprite += draw(lastIndex, lastX)
-                    pixels[lastIndex] = lastSprite
-
-                    lastX += add
-                    cycles[lastIndex] = lastX
-                }
-            }
-        }
-        .let {
-            val sb = StringBuilder()
-            val ps = pixels.filter { (index) -> index % 40 == 0 }
-            ps.forEach { (_, pixels) ->
-                sb.appendLine(pixels)
-            }
-            sb.toString().trim()
-        }
-
-    fun draw(cycle: Int, sprite: Int): Char {
-        val pixel = '#'
-        val blank = '.'
-        val s = listOf(sprite - 1, sprite, sprite + 1)
-
-        val i = (cycle - 1) % 40
-        if (s.contains(i)) {
-            return pixel
-        } else {
-            return blank
-        }
-    }
+        .let { (_, pixels) -> pixels }
+        .chunked(PIXELS_STEP)
+        .joinToString("\n")
 
     private fun parseInput() = readInput("_2022/10")
         .split("\n")
         .map { it.split(' ') }
+
+    private fun signal(instruction: List<String>, prevSignals: List<Int>, x: Int): List<Int> =
+        instruction.fold(prevSignals) { signals, _ ->
+            val cycle = signals.size + 1
+            val signal = cycle * x
+            signals + signal
+        }
+
+    private fun drawPixel(instruction: List<String>, prevPixels: String, register: Int): String =
+        instruction.fold(prevPixels) { pixels , _ ->
+            pixels + pixelFor(cycle = pixels.length + 1, register)
+        }
+
+    private fun pixelFor(cycle: Int, register: Int): Char {
+        val sprite = listOf(register - 1, register, register + 1)
+        return if (sprite.contains((cycle - 1) % 40)) PIXEL_LIT else PIXEL_DARK
+    }
+
+    private operator fun List<String>.component2(): Int? = getOrNull(1)?.toIntOrNull()
+
+    private operator fun Int.plus(instruction: List<String>): Int =
+        this + instruction.let { (name, amount) ->
+            when (name) {
+                "addx" -> (amount ?: error("invalid instruction value $amount"))
+                else -> 0
+            }
+        }
 
 }
