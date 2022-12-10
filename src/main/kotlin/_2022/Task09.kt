@@ -2,7 +2,6 @@ package _2022
 
 import Task
 import readInput
-import utils.Matrix
 import utils.Matrix.areAdjacent
 import utils.Matrix.Direction
 import utils.Point
@@ -20,9 +19,9 @@ object Task09 : Task {
         .fold(Rope(knots)) { rope, (direction, steps) ->
             rope.apply {
                 repeat(steps) {
-                    head = moveHead(direction, head)
+                    head += direction.toDirection().delta
                     tail = moveTail(this)
-                    visited.add(tail.last())
+                    visited += tail.last()
                 }
             }
         }
@@ -31,13 +30,10 @@ object Task09 : Task {
         .split("\n")
         .map { it.split(" ").let { (direction, steps) -> direction to steps.toInt() } }
 
-    private fun moveHead(direction: String, head: Point): Point =
-        head - direction.toDirection().delta
-
     private fun moveTail(rope: Rope): Tail = rope.tail
         .fold(Tail(rope.tail.size)) { tail, knot ->
             val head = tail.lastOrNull() ?: rope.head
-            tail.add(motion(head, knot))
+            tail += motion(head, knot)
             tail
         }
 

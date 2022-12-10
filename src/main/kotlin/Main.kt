@@ -1,5 +1,5 @@
 fun main() {
-    val task = _2022.Task09
+    val task = _2022.Task10
     println("partA = ${task.partA()}")
     println("partB = ${task.partB()}")
 }
