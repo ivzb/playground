@@ -2,7 +2,9 @@ package _2022
 
 import Task
 import readInput
-import utils.Numbers.lowestCommonMultiple
+import utils.Math.isDivisibleBy
+import utils.Math.lcm
+import utils.Math.product
 import utils.Parse.firstInt
 
 typealias ReliefWorryLevel = (Long) -> Long
@@ -10,7 +12,7 @@ typealias Inspection = Pair<Int, Long>
 
 object Task11 : Task {
 
-    private val lcmDividers = lowestCommonMultiple(parseInput().map { it.divisibleBy })
+    private val lcmDividers = parseInput().map { it.test }.lcm()
 
     override fun partA() = chaseMonkeys(rounds = 20) { worryLevel ->
         worryLevel / 3
@@ -35,25 +37,23 @@ object Task11 : Task {
         }
         .sortedDescending()
         .take(2)
-        .reduce { acc, inspections -> acc * inspections }
+        .product()
 
     private fun parseInput() = readInput("_2022/11")
         .split("\n\n")
-        .mapIndexed { index, it ->
-            it.split("\n").let(::Monkey)
-        }
+        .map { it.split("\n").let(::Monkey) }
 
     private data class Monkey(
         val items: ArrayDeque<Long>,
         val operation: String,
-        val divisibleBy: Int,
+        val test: Int,
         val throwIndexes: Map<Boolean, Int>
     ) {
 
         constructor(it: List<String>) : this(
             items = ArrayDeque(it[1].split(' ', ',').mapNotNull { it.toLongOrNull() }),
             operation = it[2].split('=')[1].trim(),
-            divisibleBy = it[3].firstInt(),
+            test = it[3].firstInt(),
             throwIndexes = mapOf(
                 true to it[4].firstInt(),
                 false to it[5].firstInt()
@@ -72,7 +72,7 @@ object Task11 : Task {
                 }
 
                 val inspection = reliefWorryLevel(worryLevel).let { manageableWorryLevel ->
-                    val isDivisible = manageableWorryLevel % divisibleBy == 0L
+                    val isDivisible = manageableWorryLevel isDivisibleBy test
                     val throwIndex = throwIndexes[isDivisible] ?: error("undefined index $isDivisible")
                     throwIndex to manageableWorryLevel
                 }
