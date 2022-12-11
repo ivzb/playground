@@ -43,7 +43,7 @@ object Task10 : Task {
         }
 
     private fun drawPixel(instruction: List<String>, prevPixels: String, register: Int): String =
-        instruction.fold(prevPixels) { pixels , _ ->
+        instruction.fold(prevPixels) { pixels, _ ->
             pixels + pixelFor(cycle = pixels.length + 1, register)
         }
 

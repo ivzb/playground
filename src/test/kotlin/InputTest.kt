@@ -25,6 +25,7 @@ class InputTest {
                                       "#..#.###.....#.####..#...#.##.####.###..\n" +
                                       "#..#.#....#..#.#..#.#....#..#.#..#.#....\n" +
                                       "###..#.....##..#..#.####..###.#..#.#...."),
+            _2022.Task11 to (56350L to 13954061248L),
         ).forEach { task, (expectedPartA, expectedPartB) ->
             assertEquals(expectedPartA, task.partA())
             assertEquals(expectedPartB, task.partB())
