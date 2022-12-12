@@ -2,8 +2,8 @@ package _2022
 
 import Task
 import readInput
+import utils.Direction
 import utils.Matrix.areAdjacent
-import utils.Matrix.Direction
 import utils.Point
 import java.lang.Exception
 

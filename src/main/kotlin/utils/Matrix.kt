@@ -6,12 +6,7 @@ import java.lang.Math.max
 
 object Matrix {
 
-    enum class Direction(val delta: Point) {
-        UP(Point(0, 1)),
-        RIGHT(Point(1, 0)),
-        DOWN(Point(0, -1)),
-        LEFT(Point(-1, 0));
-    }
+
 
     fun areAdjacent(
         p1: Point,
@@ -30,6 +25,34 @@ object Matrix {
         matrix.slice(i + 1 until matrix.size).map { it[j] }, // bottom
         matrix[i].slice(0 until j).reversed(), // left
     )
+
+    fun <T> adjacent(matrix: List<List<T>>, i: Int, j: Int) = listOf(
+        matrix.slice(0 until i).map { it[j] }.reversed().firstOrNull(), // top
+        matrix[i].slice(j + 1 until matrix[j].size).firstOrNull(), // right
+        matrix.slice(i + 1 until matrix.size).map { it[j] }.firstOrNull(), // bottom
+        matrix[i].slice(0 until j).reversed().firstOrNull(), // left
+    )
+
+    // todo: take N elements
+    fun <T> adjacentIndexed(matrix: List<List<T>>, row: Int, col: Int): List<Pair<Pair<Int, Int>, T>> =
+        adjacentIndexes( row, col)
+            .filter { (i, j) -> (i in matrix.indices) && (j in matrix[i].indices) }
+            .map { (i, j) -> (i to j) to matrix[i][j] }
+
+    fun <T> adjacentIndexed(matrix: List<List<T>>, position: Point): List<Pair<Pair<Int, Int>, T>> =
+        adjacentIndexed(matrix, position.x, position.y)
+
+    fun adjacentIndexes(row: Int, col: Int): List<Pair<Int, Int>> =
+        listOfNotNull(
+            row - 1 to col, // top
+            row to col + 1, // right
+            row + 1 to col, // bottom
+            row to col - 1, // left
+        )
+
+    // todo: create data class to hold row and col?
+    fun adjacentIndexes(position: Point): List<Point> =
+        adjacentIndexes(position.x, position.y).map { it.toPoint() }
 
     /**
      * Distance measured only horizontally and vertically, but not diagonally
