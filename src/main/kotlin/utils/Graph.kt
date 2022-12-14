@@ -22,6 +22,7 @@ object Graph {
                 Direction.RIGHT -> '<'
                 Direction.DOWN -> 'v'
                 Direction.LEFT -> '>'
+                else -> error("wrong direction")
             }
         }
 

@@ -17,6 +17,11 @@ data class Point(val x: Int = 0, val y: Int = 0) {
     companion object {
 
         fun Pair<Int, Int>.toPoint(): Point = Point(first, second)
+
+        fun String.toPoint(): Point = this
+            .split(',')
+            .map { it.toInt() }
+            .let { (x, y) -> Point(x, y) }
     }
 
 }

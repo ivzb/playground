@@ -25,7 +25,7 @@ class Task13Test {
             "[1,[2,[3,[4,[5,6,7]]]],8,9]",
             "[1,[2,[3,[4,[5,6,0]]]],8,9]",
             "[10,5]"
-        ).map { expected ->
+        ).forEach { expected ->
             val actual = Task13.parseTree(expected).toString()
             assertEquals(expected, actual)
         }
@@ -33,46 +33,20 @@ class Task13Test {
 
     @Test
     fun testIsInRightOrder() {
-       testIsInRightOrder("[1,1,3,1,1]", "[1,1,5,1,1]", true)
-    }
+        listOf(
+            true to ("[1,1,3,1,1]" to "[1,1,5,1,1]"),
+            true to ("[[1],[2,3,4]]" to "[[1],4]"),
+            false to ("[9]" to "[[8,7,6]]"),
+            true to ("[[4,4],4,4]" to "[[4,4],4,4,4]"),
+            false to ("[7,7,7,7]" to "[7,7,7]"),
+            true to ("[]" to "[3]"),
+            false to ("[[[]]]" to "[[]]"),
+            false to ("[1,[2,[3,[4,[5,6,7]]]],8,9]" to "[1,[2,[3,[4,[5,6,0]]]],8,9]"),
+        ).forEach { (expected, trees) ->
+            val (left, right) = trees
+            val actual = Task13.isInRightOrder(left, right)
+            assertEquals(expected, actual)
+        }
 
-    @Test
-    fun testIsInRightOrder2() {
-        testIsInRightOrder("[[1],[2,3,4]]", "[[1],4]", true)
-    }
-
-    @Test
-    fun testIsInRightOrder3() {
-        testIsInRightOrder("[9]", "[[8,7,6]]", false)
-    }
-
-    @Test
-    fun testIsInRightOrder4() {
-        testIsInRightOrder("[[4,4],4,4]", "[[4,4],4,4,4]", true)
-    }
-
-    @Test
-    fun testIsInRightOrder5() {
-        testIsInRightOrder("[7,7,7,7]", "[7,7,7]", false)
-    }
-
-    @Test
-    fun testIsInRightOrder6() {
-        testIsInRightOrder("[]", "[3]", true)
-    }
-
-    @Test
-    fun testIsInRightOrder7() {
-        testIsInRightOrder("[[[]]]", "[[]]", false)
-    }
-
-    @Test
-    fun testIsInRightOrder8() {
-        testIsInRightOrder("[1,[2,[3,[4,[5,6,7]]]],8,9]", "[1,[2,[3,[4,[5,6,0]]]],8,9]", false)
-    }
-
-    private fun testIsInRightOrder(left: String, right: String, expected: Boolean) {
-        val actual = Task13.isInRightOrder(left, right)
-        assertEquals(expected, actual)
     }
 }
