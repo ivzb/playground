@@ -6,8 +6,6 @@ import java.lang.Math.max
 
 object Matrix {
 
-
-
     fun areAdjacent(
         p1: Point,
         p2: Point,
