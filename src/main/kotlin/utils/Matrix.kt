@@ -59,7 +59,7 @@ object Matrix {
      * 1 . 1
      * 2 1 2
      */
-    private fun manhattanDistance(p1: Point, p2: Point): Int {
+    fun manhattanDistance(p1: Point, p2: Point): Int {
         val deltaX = abs(p1.x - p2.x)
         val deltaY = abs(p1.y - p2.y)
         return deltaX + deltaY

@@ -7,4 +7,7 @@ object Parse {
 
     fun String.firstLong(delimiter: Char = ' '): Long =
         this.split(delimiter).firstNotNullOf { it.toLongOrNull() }
+
+    fun List<String>.ints(): List<Int> =
+        this.mapNotNull { it.toIntOrNull() }
 }

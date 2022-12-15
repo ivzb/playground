@@ -18,6 +18,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    jvmArgs = listOf("-Xmx4g")
 }
 
 tasks.withType<KotlinCompile> {

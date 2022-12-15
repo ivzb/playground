@@ -15,6 +15,7 @@ object Visualization {
                     append(textValue(Point(x, y)))
                 }
 
+                append(" y = $y")
                 appendLine()
             }
         }.toString()
