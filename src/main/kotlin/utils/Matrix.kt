@@ -94,4 +94,8 @@ object Matrix {
         1 to -1,  // Down-Left
         1 to 1,   // Down-Right
     )
+
+    fun isWithinManhattanDistance(p1: Point, p2: Point, p3: Point): Boolean {
+        return abs(p1.x - p3.x) + abs(p1.y - p3.y) <= abs(p1.x - p2.x) + abs(p1.y - p2.y)
+    }
 }

@@ -6,7 +6,6 @@ import utils.Matrix.adjacentIndexes
 import utils.Point
 import utils.Point.Companion.toPoint
 
-typealias Matrix = List<List<Char>>
 typealias Graph = Map<Point, Task12.Node>
 typealias Adjacent = List<Task12.Node>
 
@@ -26,7 +25,7 @@ object Task12 : Task {
         .split("\n")
         .map { it.toCharArray().toList() }
 
-    private fun Matrix.toGraph(): Graph {
+    private fun List<List<Char>>.toGraph(): Graph {
         return this
             .mapIndexed { row, it ->
                 it.mapIndexed { col, elevation ->
