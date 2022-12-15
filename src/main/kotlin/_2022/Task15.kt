@@ -14,10 +14,16 @@ object Task15 : Task {
     private const val SENSOR = 'S'
     private const val BEACON = 'B'
 
+    data class SensorData(
+        val distance: Int,
+        val fullBounds: List<Bounds>,
+        val bounds: Bounds,
+    )
+
     val Y = 2000000
 
     override fun partA() = parseInput().let {
-        val tunnels = HashMap<Point, Char>()
+        val map = HashMap<Point, Char>()
         val closest = HashMap<Point, Point>()
         val distances = HashMap<Pair<Point, Point>, Int>()
 
@@ -25,8 +31,8 @@ object Task15 : Task {
             val sensor = Point(sensorX, sensorY)
             val beacon = Point(beaconX, beaconY)
 
-            tunnels[sensor] = SENSOR
-            tunnels[beacon] = BEACON
+            map[sensor] = SENSOR
+            map[beacon] = BEACON
             closest[sensor] = beacon
             distances[sensor to beacon] = Matrix.manhattanDistance(sensor, beacon)
         }
@@ -55,20 +61,21 @@ object Task15 : Task {
             }
         }
 
-        noBeaconAt.count { !tunnels.containsKey(it) }
+        noBeaconAt.count { !map.containsKey(it) }
     }
 
     override fun partB() = parseInput().let {
-        val tunnels = HashMap<Point, Char>()
-        val distances = HashMap<Pair<Point, Point>, Int>()
+        val distances = HashMap<Pair<Point, Point>, SensorData>()
 
         it.map { (sensorX, sensorY, beaconX, beaconY) ->
             val sensor = Point(sensorX, sensorY)
             val beacon = Point(beaconX, beaconY)
 
-            tunnels[sensor] = SENSOR
-            tunnels[beacon] = BEACON
-            distances[sensor to beacon] = Matrix.manhattanDistance(sensor, beacon)
+            val distance =  Matrix.manhattanDistance(sensor, beacon)
+            val fullBounds = distanceBounds(sensor, distance)
+            val bounds = fullBounds.rebound()
+            val data = SensorData(distance, fullBounds, bounds)
+            distances[sensor to beacon] = data
         }
 
         val max = Y * 2
@@ -76,16 +83,22 @@ object Task15 : Task {
 
         (0..max).forEach { x ->
             var y = 0
+            val row = Point(x, y)
+            val nearByDistances = distances.filter { (_, data) ->
+                row.isWithinX(data.bounds)
+            }
+
             while (y < max) {
                 val possible = Point(x, y)
                 var isDetectedByAnySensor = false
 
-                for ((distancePositions, sensorToBeaconDistance) in distances) {
-                    val (sensor, beacon) = distancePositions
+                for ((positions, distance) in nearByDistances) {
+                    val (sensor, beacon) = positions
                     val isDetectedByCurrentSensor = Matrix.isWithinManhattanDistance(sensor, beacon, possible)
 
                     if (isDetectedByCurrentSensor) {
                         val sensorToPossibleDistance = Matrix.manhattanDistance(sensor, possible)
+                        val (sensorToBeaconDistance) = distance
                         val sensorDistance = abs(sensorToBeaconDistance - sensorToPossibleDistance)
                         y += sensorDistance
                         isDetectedByAnySensor = true

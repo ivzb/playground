@@ -13,7 +13,12 @@ data class Point(val x: Int = 0, val y: Int = 0) {
     fun toDirection(): Direction = Direction.from(this)
 
     fun isWithin(bounds: Bounds): Boolean =
-        this.x >= bounds.min.x && this.x <= bounds.max.x &&
+        isWithinX(bounds) && isWithinY(bounds)
+
+    fun isWithinX(bounds: Bounds): Boolean =
+        this.x >= bounds.min.x && this.x <= bounds.max.x
+
+    fun isWithinY(bounds: Bounds): Boolean =
         this.y >= bounds.min.y && this.y <= bounds.max.y
 
     override fun toString(): String = "($x,$y)"

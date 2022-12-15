@@ -1,5 +1,22 @@
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTimedValue
+
 fun main() {
     val task = _2022.Task15
-    println("partA = ${task.partA()}")
-    println("partB = ${task.partB()}")
+
+    measure {
+        task.partA()
+    }
+
+    measure {
+        task.partB()
+    }
+}
+
+@OptIn(ExperimentalTime::class)
+private fun measure(task: () -> Any) {
+    val (value, duration) = measureTimedValue {
+        task()
+    }
+    println("partB took ${duration.inWholeSeconds} seconds and got ${value}.")
 }
