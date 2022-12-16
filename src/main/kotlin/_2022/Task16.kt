@@ -5,125 +5,53 @@ import readInput
 
 object Task16 : Task {
 
-    data class Valve(
-        val name: String,
-        val flowRate: Int,
-        val leadsTo: List<String>
-    ) {
+    private const val PART_A_MINUTES = 30
+    private const val PART_B_MINUTES = 26
 
-        fun neighbors(valves: Map<String, Valve>): List<Valve> {
-            return leadsTo.map { valveName ->
-                valves[valveName]!!
-            }
-        }
+    override fun partA() = parseInput().let { allValves ->
+        val maxOpenedValves = allValves.values.count { it.flowRate > 0 }
 
-        override fun toString(): String {
-            return "$name(rate=$flowRate)"
-        }
-    }
-
-
-    data class PathB(
-        val valvesMe: List<Valve>,
-        val valvesElephant: List<Valve>,
-        val opened: Map<Valve, Int>,
-        val time: Int,
-    ) {
-
-        fun lastMe(): Valve = valvesMe.last()
-        fun lastElephant(): Valve = valvesElephant.last()
-
-        fun hasOpened(valve: Valve): Boolean = opened.containsKey(valve)
-
-        fun total(): Int {
-            // todo: check if calculation is correct
-            // todo: partA is 30
-            return opened.map { (valve, time) -> (26 - time) * valve.flowRate }.sum()
-//            return opened.map { (_, total) -> total }.sum()
-        }
-
-        override fun toString(): String {
-            val namesMe = valvesMe/*.drop(1)*/.mapIndexed { index, valve ->
-                var result = valve.name
-                if (index > 0 && valvesMe[index - 1].name == valvesMe[index].name) {
-                    result = "($result)"
-                }
-                result
-            }
-            val namesElephant = valvesElephant/*.drop(1)*/.mapIndexed { index, valve ->
-                var result = valve.name
-                if (index > 0 && valvesElephant[index - 1].name == valvesElephant[index].name) {
-                    result = "($result)"
-                }
-                result
-            }
-            val opened = opened.size
-            return namesMe.joinToString(" -> ") + "\n " +
-                    namesElephant.joinToString(" -> ") + "\n " +
-                    " (opened=$opened, time = $time, total ${total()})"
-        }
-    }
-
-    override fun partA() = parseInput().let {
-        val allValves = it.associate {
-            val name = it[0]
-            val flowRate = it[1].toInt()
-            val leadsTo = it.subList(2, it.size)
-            name to Valve(name, flowRate, leadsTo)
-        }
-
-        val MAX_OPENABLE_VALVES = allValves.values.count { it.flowRate > 0 }
-
-        var start = allValves["AA"]!!
-
+        val start = allValves["AA"] ?: error("valve AA not found")
         val startPath = PathA(
-            valves = arrayListOf(start),
+            valves = listOf(start),
             opened = HashMap(),
-            time = 0,
         )
-
         var allPaths = listOf(startPath)
         var bestPath = startPath
 
-        var remainingTime = 30
-        var time = 0
+        var time = 1
 
-        while (time < 30) {
-//            println("time = $time")
-//            println(bestPath)
-
+        while (time < PART_A_MINUTES) {
             val newPaths = arrayListOf<PathA>()
+
             for (currentPath in allPaths) {
-                if (currentPath.opened.size == MAX_OPENABLE_VALVES) {
+                if (currentPath.opened.size == maxOpenedValves) {
                     continue
                 }
 
                 val currentLast = currentPath.last()
                 val currentValves = currentPath.valves
-                val currentTime = currentPath.time + 1
 
-                // open
+                // open valve
                 if (currentLast.flowRate > 0 && !currentPath.opened.containsKey(currentLast)) {
                     val opened = currentPath.opened.toMutableMap()
-                    opened[currentLast] = currentTime
+                    opened[currentLast] = time
                     val possibleValves = currentValves + currentLast
-                    val possibleOpenedPath = PathA(possibleValves, opened, currentTime)
+                    val possibleOpenedPath = PathA(possibleValves, opened)
                     newPaths.add(possibleOpenedPath)
                 }
 
-                // move
+                // move to valve
                 val possiblePaths: List<PathA> = currentLast.leadsTo.map { lead ->
-                    // add possible path and move on
-                    val possibleValve = allValves[lead]!!
+                    val possibleValve = allValves[lead] ?: error("valve $lead not found")
                     val possibleValves = currentValves + possibleValve
-                    val possiblePath = PathA(possibleValves, currentPath.opened, currentTime)
+                    val possiblePath = PathA(possibleValves, currentPath.opened)
                     possiblePath
                 }
 
                 newPaths.addAll(possiblePaths)
             }
 
-            // todo: stop looking for paths when all possible valves have been opened
             allPaths = newPaths.sortedByDescending { it.total() }.take(10000)
 
             if (allPaths.first().total() > bestPath.total()) {
@@ -131,73 +59,30 @@ object Task16 : Task {
             }
 
             time++
-            remainingTime--
         }
-
-//        (1..30).forEach { minute ->
-//            bestPath.apply {
-//                println("== Minute ${minute}")
-//                val openedValves = opened.filter { (_, time) -> time < minute }
-//                if (openedValves.size == 0) {
-//                    println("No valves are open.")
-//                } else {
-//                    val pressure = openedValves.map { (valve) -> valve.flowRate }.sum()
-//                    val names = openedValves.map { (valve) -> valve.name }.joinToString(", ")
-//                    println("Valves $names are open, releasing $pressure pressure.")
-//                }
-//
-//                val valves = valves.drop(1)
-//                if (minute < valves.size) {
-//                    val valve = valves[minute]
-//
-//                    if (opened.containsKey(valve) && opened[valve]!! == minute) {
-//                        println("You open valve ${valve.name}.")
-//                    } else {
-//                        println("You move to valve ${valve.name}.")
-//                    }
-//
-//                    println()
-//                }
-//            }
-//
-//        }
 
         bestPath.total()
     }
 
-    override fun partB() = parseInput().let {
-        val allValves = it.associate {
-            val name = it[0]
-            val flowRate = it[1].toInt()
-            val leadsTo = it.subList(2, it.size)
-            name to Valve(name, flowRate, leadsTo)
-        }
+    override fun partB() = parseInput().let { allValves ->
+        val maxOpenedValves = allValves.values.count { it.flowRate > 0 }
 
-        val MAX_OPENABLE_VALVES = allValves.values.count { it.flowRate > 0 }
-
-        var start = allValves["AA"]!!
-
+        val start = allValves["AA"] ?: error("valve AA not found")
         val startPath = PathB(
-            valvesMe = arrayListOf(start),
-            valvesElephant = arrayListOf(start),
+            valvesMe = listOf(start),
+            valvesElephant = listOf(start),
             opened = HashMap(),
-            time = 0,
         )
-
         var allPaths = listOf(startPath)
         var bestPath = startPath
 
-        var remainingTime = 26
-        var time = 0
+        var time = 1
 
-        while (time < 26) {
-//            println("time = $time")
-//            println(bestPath)
-
+        while (time < PART_B_MINUTES) {
             val newPaths = arrayListOf<PathB>()
 
             for (currentPath in allPaths) {
-                if (currentPath.opened.size == MAX_OPENABLE_VALVES) {
+                if (currentPath.opened.size == maxOpenedValves) {
                     continue
                 }
 
@@ -205,56 +90,48 @@ object Task16 : Task {
                 val currentLastElephant = currentPath.lastElephant()
                 val currentValvesMe = currentPath.valvesMe
                 val currentValvesElephant = currentPath.valvesElephant
-                val currentTime = currentPath.time + 1
 
                 val openMe = currentLastMe.flowRate > 0 && !currentPath.opened.containsKey(currentLastMe)
-                val openElephant = currentLastElephant.flowRate > 0 && !currentPath.opened.containsKey(currentLastElephant)
+                val openElephant =
+                    currentLastElephant.flowRate > 0 && !currentPath.opened.containsKey(currentLastElephant)
 
-                if (openMe && openElephant) {
+                // open both, mine or elephant's valve
+                if (openMe || openElephant) {
                     val opened = currentPath.opened.toMutableMap()
-                    opened[currentLastMe] = currentTime
-                    val possibleValvesMe = currentValvesMe + currentLastMe
 
-                    opened[currentLastElephant] = currentTime
-                    val possibleValvesElephant = currentValvesElephant + currentLastElephant
-
-                    val possibleOpenedPath = PathB(possibleValvesMe, possibleValvesElephant, opened, currentTime)
-                    newPaths.add(possibleOpenedPath)
-                } else if (openMe) {
-                    val opened = currentPath.opened.toMutableMap()
-                    opened[currentLastMe] = currentTime
-                    val possibleValvesMe = currentValvesMe + currentLastMe
-
-                    val possibleValvesElephants: List<List<Valve>> = currentLastElephant.leadsTo.map { lead ->
-                        // add possible path and move on
-                        val possibleValve = allValves[lead]!!
-                        val possibleValves = currentValvesElephant + possibleValve
-                        possibleValves
+                    val possibleValvesMes: List<List<Valve>> = if (openMe) {
+                        opened[currentLastMe] = time
+                        listOf(currentValvesMe + currentLastMe)
+                    } else {
+                        currentLastMe.leadsTo.map { lead ->
+                            // add possible path and move on
+                            val possibleValve = allValves[lead] ?: error("valve $lead not found")
+                            val possibleValves = currentValvesMe + possibleValve
+                            possibleValves
+                        }
                     }
 
-                    for (possibleValvesElephant in possibleValvesElephants) {
-                        val possibleOpenedPath = PathB(possibleValvesMe, possibleValvesElephant, opened, currentTime)
-                        newPaths.add(possibleOpenedPath)
-                    }
-
-                } else if (openElephant) {
-                    val opened = currentPath.opened.toMutableMap()
-                    opened[currentLastElephant] = currentTime
-                    val possibleValvesElephant = currentValvesElephant + currentLastElephant
-
-                    val possibleValvesMes: List<List<Valve>> = currentLastMe.leadsTo.map { lead ->
-                        // add possible path and move on
-                        val possibleValve = allValves[lead]!!
-                        val possibleValves = currentValvesMe + possibleValve
-                        possibleValves
+                    val possibleValvesElephants: List<List<Valve>> = if (openElephant) {
+                        opened[currentLastElephant] = time
+                        listOf(currentValvesElephant + currentLastElephant)
+                    } else {
+                        currentLastElephant.leadsTo.map { lead ->
+                            // add possible path and move on
+                            val possibleValve = allValves[lead] ?: error("valve $lead not found")
+                            val possibleValves = currentValvesElephant + possibleValve
+                            possibleValves
+                        }
                     }
 
                     for (possibleValvesMe in possibleValvesMes) {
-                        val possibleOpenedPath = PathB(possibleValvesMe, possibleValvesElephant, opened, currentTime)
-                        newPaths.add(possibleOpenedPath)
+                        for (possibleValvesElephant in possibleValvesElephants) {
+                            val possibleOpenedPath = PathB(possibleValvesMe, possibleValvesElephant, opened)
+                            newPaths.add(possibleOpenedPath)
+                        }
                     }
                 }
 
+                // move to valves
                 val combinedLeads = currentLastMe.leadsTo.map { leadMe ->
                     currentLastElephant.leadsTo.map { leadElephant ->
                         leadMe to leadElephant
@@ -263,21 +140,18 @@ object Task16 : Task {
                     .flatten()
                     .filter { (a, b) -> a != b }
 
-                // move combined
                 val possiblePaths: List<PathB> = combinedLeads.map { (leadMe, leadElephant) ->
-                    // add possible path and move on
-                    val possibleValveMe = allValves[leadMe]!!
+                    val possibleValveMe = allValves[leadMe] ?: error("valve $leadMe not found")
                     val possibleValvesMe = currentValvesMe + possibleValveMe
-                    val possibleValveElephant = allValves[leadElephant]!!
+                    val possibleValveElephant = allValves[leadElephant] ?: error("valve $leadElephant not found")
                     val possibleValvesElephant = currentValvesElephant + possibleValveElephant
-                    val possiblePath = PathB(possibleValvesMe, possibleValvesElephant, currentPath.opened, currentTime)
+                    val possiblePath = PathB(possibleValvesMe, possibleValvesElephant, currentPath.opened)
                     possiblePath
                 }
 
                 newPaths.addAll(possiblePaths)
             }
 
-            // todo: stop looking for paths when all possible valves have been opened
             allPaths = newPaths.sortedByDescending { it.total() }.take(100000)
 
             if (allPaths.first().total() > bestPath.total()) {
@@ -285,36 +159,7 @@ object Task16 : Task {
             }
 
             time++
-            remainingTime--
         }
-
-//        (1 .. 26).forEach { minute ->
-//            bestPath.apply {
-//                println("== Minute ${minute}")
-//                val openedValves = opened.filter { (_, time) -> time < minute }
-//                if (openedValves.size == 0) {
-//                    println("No valves are open.")
-//                } else {
-//                    val pressure = openedValves.map { (valve) -> valve.flowRate }.sum()
-//                    val names = openedValves.map { (valve) -> valve.name }.joinToString(", ")
-//                    println("Valves $names are open, releasing $pressure pressure.")
-//                }
-//
-//                val valves = valves.drop(1)
-//                if (minute < valves.size) {
-//                    val valve = valves[minute]
-//
-//                    if (opened.containsKey(valve) && opened[valve]!! == minute) {
-//                        println("You open valve ${valve.name}.")
-//                    } else {
-//                        println("You move to valve ${valve.name}.")
-//                    }
-//
-//                    println()
-//                }
-//            }
-
-//        }
 
         bestPath.total()
     }
@@ -322,36 +167,41 @@ object Task16 : Task {
     private fun parseInput() = readInput("_2022/16")
         .split("\n")
         .asSequence()
-        .map { it.replace("Valve ", "") }
-        .map { it.replace("has flow rate=", "") }
-        .map { it.replace("; tunnels lead to valves", "") }
-        .map { it.replace("; tunnel leads to valve", "") }
-        .map { it.split(' ', ',') }
-        .map { it.filter { it.isNotEmpty() } }
-        .toList()
+        .map {
+            it.replace("Valve ", "")
+                .replace("has flow rate=", "")
+                .replace("has flow rate=", "")
+                .replace("; tunnels lead to valves", "")
+                .replace("; tunnel leads to valve", "")
+                .split(' ', ',')
+                .filter { it.isNotEmpty() }
+        }
+        .let {
+            it.associate {
+                val name = it[0]
+                val flowRate = it[1].toInt()
+                val leadsTo = it.subList(2, it.size)
+                name to Valve(flowRate, leadsTo)
+            }
+        }
 
-    data class PathA(
-        val valves: List<Valve>,
-        val opened: Map<Valve, Int>,
-        val time: Int,
-    ) {
+
+    data class Valve(val flowRate: Int, val leadsTo: List<String>)
+
+    data class PathA(val valves: List<Valve>, val opened: Map<Valve, Int>) {
 
         fun last(): Valve = valves.last()
 
-        fun total(): Int {
-            return opened.map { (valve, time) -> (30 - time) * valve.flowRate }.sum()
-        }
+        fun total(): Int = opened.map { (valve, time) -> (PART_A_MINUTES - time) * valve.flowRate }.sum()
 
-        override fun toString(): String {
-            val names = valves/*.drop(1)*/.mapIndexed { index, valve ->
-                var result = valve.name
-                if (index > 0 && valves[index - 1].name == valves[index].name) {
-                    result = "($result)"
-                }
-                result
-            }
-            val opened = opened.size
-            return names.joinToString(" -> ") + " (opened=$opened, time = $time, total ${total()})"
-        }
+    }
+
+    data class PathB(val valvesMe: List<Valve>, val valvesElephant: List<Valve>, val opened: Map<Valve, Int>) {
+
+        fun lastMe(): Valve = valvesMe.last()
+        fun lastElephant(): Valve = valvesElephant.last()
+
+        fun total(): Int = opened.map { (valve, time) -> (PART_B_MINUTES - time) * valve.flowRate }.sum()
+
     }
 }
