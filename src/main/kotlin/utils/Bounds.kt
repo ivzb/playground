@@ -26,7 +26,7 @@ data class Bounds(val min: Point, val max: Point) {
             )
         }
 
-        fun Collection<Point>.toBounds(): Bounds {
+        fun Collection<Point>.bounds(): Bounds {
             var minX = Int.MAX_VALUE
             var maxX = Int.MIN_VALUE
             var minY = Int.MAX_VALUE

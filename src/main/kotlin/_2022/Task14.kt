@@ -2,13 +2,9 @@ package _2022
 
 import Task
 import readInput
-import utils.Bounds.Companion.toBounds
-import utils.Direction
+import utils.Bounds.Companion.bounds
 import utils.Point
 import utils.Point.Companion.toPoint
-import utils.Visualization
-import utils.Visualization.print
-import java.lang.StringBuilder
 import kotlin.math.max
 import kotlin.math.min
 
@@ -22,7 +18,7 @@ object Task14 : Task {
     override fun partA() = buildCave()
         .let { cave ->
             var fallingSand: Point? = null
-            val caveBounds = cave.keys.toBounds()
+            val caveBounds = cave.keys.bounds()
 
             while (true) {
                 if (fallingSand == null) {
@@ -56,7 +52,7 @@ object Task14 : Task {
     override fun partB() = buildCave()
         .let { cave ->
             var fallingSand: Point? = null
-            val caveBounds = cave.keys.toBounds()
+            val caveBounds = cave.keys.bounds()
             val floorY = caveBounds.max.y + 2
 
             while (true) {

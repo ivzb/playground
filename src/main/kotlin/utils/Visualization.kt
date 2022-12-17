@@ -1,14 +1,13 @@
 package utils
 
-import _2022.Task14
-import utils.Bounds.Companion.toBounds
+import utils.Bounds.Companion.bounds
 import java.lang.StringBuilder
 
 object Visualization {
 
     fun points(points: Collection<Point>, textValue: (Point) -> String): String =
         StringBuilder().apply {
-            val caveBounds = points.toBounds()
+            val caveBounds = points.bounds()
 
             (caveBounds.min.y..caveBounds.max.y).forEach { y ->
                 (caveBounds.min.x..caveBounds.max.x).forEach { x ->
