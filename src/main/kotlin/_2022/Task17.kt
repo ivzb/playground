@@ -6,6 +6,7 @@ import utils.Bounds
 import utils.Bounds.Companion.bounds
 import utils.Bounds.Companion.rebound
 import utils.Point
+import java.lang.Math.abs
 import java.lang.StringBuilder
 import java.util.LinkedList
 
@@ -183,7 +184,7 @@ object Task17 : Task {
 //                    chamber = chamber.take(100)
                 }
 
-                println(chamber.bounds().min.y)
+                abs(chamber.bounds().min.y)
             }
 
     private fun spawnRock(counter: Int, chamberBounds: Bounds): Rock {

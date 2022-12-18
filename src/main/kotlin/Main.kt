@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = _2022.Task17
+    val task = _2022.Task18
 
     measure {
         task.partA()
@@ -18,5 +18,5 @@ private fun measure(task: () -> Any) {
     val (value, duration) = measureTimedValue {
         task()
     }
-    println("took ${duration.inMilliseconds} ms and got ${value}.")
+    println("took ${duration.inWholeSeconds} ms and got ${value}.")
 }
