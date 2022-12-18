@@ -96,8 +96,8 @@ object Task17 : Task {
         Point(6, 0),
     )
 
-    private val WALL_LEFT = -1
-    private val WALL_RIGHT = 7
+    private const val WALL_LEFT = -1
+    private const val WALL_RIGHT = 7
 
     private val GRAVITY_DELTA = Point(0, 1)
 
@@ -108,87 +108,99 @@ object Task17 : Task {
 
     override fun partA() = simulate(2023)
 
-    override fun partB() = Unit
+    override fun partB() = simulate(1_000_000_000_000)
 
-    private fun simulate(times: Int) =
+    data class Situation(val rockIndex: Int, val jetIndex: Int)
+
+    data class Pattern(val chamberHeight: Int, val fallenRocks: Long)
+
+    private fun simulate(times: Long) =
         parseInput()
             .let { jetPattern ->
-                var rockCounter = 0
+                var rockCounter = 0L
                 var jetCounter = 0
-
                 var chamber: List<Point> = FLOOR
-
                 var fallingRock: Rock? = null
+
+                val situations = HashSet<Situation>()
+                val heights = ArrayList<Int>()
+                var patternStart: Pattern? = null
 
                 while (true) {
                     val chamberBounds = chamber.bounds()
 
+                    val jetIndex = jetCounter % jetPattern.size
+
                     if (fallingRock == null) {
-                        fallingRock = spawnRock(rockCounter, chamberBounds)
+                        val rockIndex = (rockCounter % ROCKS.size).toInt()
+                        fallingRock = spawnRock(rockIndex, chamberBounds)
                         rockCounter++
 
-                        if (rockCounter % 10000 == 0) {
-                            println("$rockCounter")
+                        val situation = Situation(rockIndex, jetIndex)
+
+                        if (situations.contains(situation)) {
+                            val pattern = Pattern(chamberHeight = abs(chamberBounds.min.y), fallenRocks = rockCounter)
+
+                            if (patternStart == null) {
+                                // found the pattern start
+                                patternStart = pattern
+                                situations.clear()
+                                heights.clear()
+                            } else {
+                                // found the pattern end
+                                val patternEnd = pattern
+
+                                val heightPerCycle = patternEnd.chamberHeight - patternStart.chamberHeight
+                                val rocksPerCycle = patternEnd.fallenRocks - patternStart.fallenRocks
+
+                                val totalRocks = times
+                                val cyclesNeeded = totalRocks / rocksPerCycle
+
+                                val remainingRocks = (times - (rocksPerCycle*cyclesNeeded)).toInt()
+                                val remainingHeight = heights[remainingRocks - 5]
+
+                                val finalHeight = (heightPerCycle * cyclesNeeded) + remainingHeight
+                                return@let finalHeight
+                            }
                         }
 
-//                    println("A new rock begins falling:")
-//                    println(print(chamber, fallingRock))
+                        situations.add(situation)
+
+                        if (patternStart != null) {
+                            heights.add(abs(chamberBounds.min.y) - patternStart.chamberHeight)
+                        }
                     }
 
-//                    val jet = jetPattern[jetCounter]
-//                    jetCounter = (jetCounter + 1 )% jetPattern.size
-                    val jet = jetPattern[jetCounter % jetPattern.size]
+                    val jet = jetPattern[jetIndex]
                     jetCounter++
                     val jetDelta = JET_DELTAS[jet] ?: error("no delta for jet $jet")
                     val fallingRockJetMovement = moveRock(fallingRock, jetDelta)
 
                     if (hitTheWall(fallingRockJetMovement) || hitTheFloor(chamber, fallingRockJetMovement)) {
                         // don't move
-
-//                    println("Jet of gas pushes rock right, but nothing happens:")
                     } else {
                         fallingRock = fallingRockJetMovement
-
-//                        val jetSide = when (jet) {
-//                            LEFT_JET -> "left"
-//                            RIGHT_JET -> "right"
-//                            else -> error("unknown jet $jet")
-//                        }
-//                    println("Jet of gas pushes rock $jetSide:")
                     }
-
-//                println(print(chamber, fallingRock))
 
                     val fallingRockGravityMovement = moveRock(fallingRock, GRAVITY_DELTA)
 
                     if (hitTheFloor(chamber, fallingRockGravityMovement)) {
-                        // todo: clean until floor
-                        chamber = fallingRock + chamber.take(100)
+                        chamber = fallingRock + chamber
                         fallingRock = null
-
-//                    println("Rock falls 1 unit, causing it to come to rest:")
                     } else {
                         fallingRock = fallingRockGravityMovement
-
-//                    println("Rock falls 1 unit:")
                     }
-
-//                println(print(chamber, fallingRock))
 
                     if (rockCounter == times) {
                         break
                     }
-
-                    // todo: try with dequeue or linked list
-//                    chamber = ArrayList(chamber.takeLast(50))
-//                    chamber = chamber.take(100)
                 }
 
                 abs(chamber.bounds().min.y)
             }
 
-    private fun spawnRock(counter: Int, chamberBounds: Bounds): Rock {
-        val rock = ROCKS[counter % ROCKS.size]
+    private fun spawnRock(rockIndex: Int, chamberBounds: Bounds): Rock {
+        val rock = ROCKS[rockIndex]
         val leftOffset = chamberBounds.min.x + SPAWN_LEFT_OFFSET
         val bottomOffset = chamberBounds.min.y - (rock.bounds().max.y + SPAWN_BOTTOM_OFFSET)
         val delta = Point(leftOffset, bottomOffset)

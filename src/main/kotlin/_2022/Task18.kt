@@ -33,7 +33,6 @@ object Task18 : Task {
     private fun notTouching(left: Set<Cube>, right: Set<Cube>): Set<Cube> =
         left.subtract(right)
 
-
     data class Grid(val cubes: Set<Cube>) {
 
         val trappedCubes: Set<Cube> by lazy {
