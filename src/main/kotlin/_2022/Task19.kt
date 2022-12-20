@@ -239,7 +239,7 @@ object Task19 : Task {
 //                println("id #$id max= $maxGeode")
 
                 maxGeode
-            }.reduce { acc, it -> acc *it }
+            }.reduce(Int::times)
         }
 
     private fun attempt(base: State, blueprint: Blueprint, robotResource: Resource?): State? {
