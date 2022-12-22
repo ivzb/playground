@@ -5,6 +5,17 @@ import kotlin.math.min
 
 data class Bounds(val min: Point, val max: Point) {
 
+    operator fun plus(other: Bounds): Bounds = Bounds(this.min + other.min, this.max + other.max)
+
+    fun isWithinX(other: Bounds): Boolean =
+        this.min.x >= other.min.x && this.min.x <= other.max.x
+
+    fun isWithinY(other: Bounds): Boolean =
+        this.min.y >= other.min.y && this.min.y <= other.max.y
+
+    fun isWithin(other: Bounds): Boolean =
+        isWithinX(other) && isWithinY(other)
+
     companion object {
 
         fun Collection<Bounds>.rebound(): Bounds {

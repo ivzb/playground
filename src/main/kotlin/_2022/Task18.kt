@@ -2,6 +2,7 @@ package _2022
 
 import Task
 import readInput
+import utils.Cube
 
 object Task18 : Task {
 
@@ -78,25 +79,5 @@ object Task18 : Task {
             // start is trapped within his neighbour cubes
             return true
         }
-    }
-
-    data class Cube(val x: Int, val y: Int, val z: Int) {
-
-        constructor(coords: List<Int>): this(coords[0], coords[1], coords[2])
-
-        val neighbours: Set<Cube>
-            get() = setOf(
-                Cube(x - 1, y, z),
-                Cube(x + 1, y, z),
-                Cube(x, y + 1, z),
-                Cube(x, y - 1, z),
-                Cube(x, y, z + 1),
-                Cube(x, y, z - 1),
-            )
-
-        val min = listOf(x, y, z).min()
-        val max = listOf(x, y, z).max()
-
-        override fun toString(): String = "($x, $y, $z)"
     }
 }

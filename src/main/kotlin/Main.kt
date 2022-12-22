@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = _2022.Task21
+    val task = _2022.Task22
 
     measure {
         task.partA()
