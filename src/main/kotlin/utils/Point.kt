@@ -23,6 +23,9 @@ data class Point(val x: Int = 0, val y: Int = 0) {
     fun isWithinY(bounds: Bounds): Boolean =
         this.y >= bounds.min.y && this.y <= bounds.max.y
 
+    fun adjacentTo(deltas: Collection<Point>): List<Point> =
+        deltas.map { it + this }
+
     override fun toString(): String = "($x,$y)"
 
     companion object {

@@ -1,10 +1,12 @@
 package _2022
 
 import Task
-import _2022.Task23.Direction.*
+import _2022.Task23.DirectionAdjacent.*
 import readInput
 import utils.Bounds
 import utils.Bounds.Companion.bounds
+import utils.Direction
+import utils.Direction.*
 import utils.Point
 
 typealias Grove = HashMap<Point, Char>
@@ -14,38 +16,29 @@ object Task23 : Task {
     private const val EMPTY = '.'
     private const val ELF = '#'
 
-    private val DELTA_N = Point(0, -1)
-    private val DELTA_NE = Point(1, -1)
-    private val DELTA_E = Point(1, 0)
-    private val DELTA_S = Point(0, 1)
-    private val DELTA_SE = Point(1, 1)
-    private val DELTA_SW = Point(-1, 1)
-    private val DELTA_W = Point(-1, 0)
-    private val DELTA_NW = Point(-1, -1)
+    private enum class DirectionAdjacent(val direction: Direction, val directions: List<Direction>) {
+        N(NORTH, listOf(NORTH, NORTH_EAST, NORTH_WEST)),
+        S(SOUTH, listOf(SOUTH, SOUTH_EAST, SOUTH_WEST)),
+        W(WEST, listOf(WEST, NORTH_WEST, SOUTH_WEST)),
+        E(EAST, listOf(EAST, NORTH_EAST, SOUTH_EAST));
 
-    private enum class Direction(val delta: Point, val deltas: List<Point>) {
-        NORTH(DELTA_N, listOf(DELTA_N, DELTA_NE, DELTA_NW)),
-        SOUTH(DELTA_S, listOf(DELTA_S, DELTA_SE, DELTA_SW)),
-        WEST(DELTA_W, listOf(DELTA_W, DELTA_NW, DELTA_SW)),
-        EAST(DELTA_E, listOf(DELTA_E, DELTA_NE, DELTA_SE)),
+        val delta = this.direction.delta
+        val deltas = this.directions.map { it.delta }
     }
 
-    private val ALL_DIRECTIONS = Direction.values()
-        .map { it.deltas }
+    private val ALL_DIRECTIONS = DirectionAdjacent.values()
+        .map { it.directions.map { it.delta } }
         .flatten()
         .toSet()
 
-    private fun adjacent(position: Point, deltas: Collection<Point>): List<Point> =
-        deltas.map { it + position }
-
     override fun partA() = solve(checkRound = 10)
 
-    override fun partB() = solve(checkRound = null)
+    override fun partB() = solve()
 
-    private fun solve(checkRound: Int?) = parseInput()
+    private fun solve(checkRound: Int? = null) = parseInput()
         .let { input ->
             val grove = buildGrove(input)
-            val directionQ = ArrayDeque(listOf(NORTH, SOUTH, WEST, EAST))
+            val directionQ = ArrayDeque(listOf(N, S, W, E))
             var round = 0
 
             while (true) {
@@ -55,7 +48,7 @@ object Task23 : Task {
                 val proposedMoves = HashMap<Point, ArrayList<Point>>()
 
                 for (elfPosition in elfPositions) {
-                    val adjacent = adjacent(elfPosition, ALL_DIRECTIONS)
+                    val adjacent = elfPosition.adjacentTo(ALL_DIRECTIONS)
                     val isElfAlone = adjacent.intersect(elfPositions).isEmpty()
 
                     if (isElfAlone) {
@@ -63,7 +56,7 @@ object Task23 : Task {
                     }
 
                     for (direction in directionQ) {
-                        val directionAdjacent = adjacent(elfPosition, direction.deltas)
+                        val directionAdjacent = elfPosition.adjacentTo(direction.deltas)
                         val canMove = directionAdjacent.intersect(elfPositions).isEmpty()
 
                         if (canMove) {

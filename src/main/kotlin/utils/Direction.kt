@@ -1,17 +1,15 @@
 package utils
 
 enum class Direction(val delta: Point) {
-    UP(Point(0, 1)),
-    UP_LEFT(Point(-1, 1)),
-    UP_RIGHT(Point(1, 1)),
 
-    RIGHT(Point(1, 0)),
-
-    DOWN(Point(0, -1)),
-    DOWN_LEFT(Point(-1, -1)),
-    DOWN_RIGHT(Point(1, -1)),
-
-    LEFT(Point(-1, 0));
+    NORTH(Point(0, -1)),
+    NORTH_EAST(Point(1, -1)),
+    EAST(Point(1, 0)),
+    SOUTH(Point(0, 1)),
+    SOUTH_EAST(Point(1, 1)),
+    SOUTH_WEST(Point(-1, 1)),
+    WEST(Point(-1, 0)),
+    NORTH_WEST(Point(-1, -1));
 
     companion object {
 

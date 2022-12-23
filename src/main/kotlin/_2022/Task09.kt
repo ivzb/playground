@@ -51,10 +51,10 @@ object Task09 : Task {
     }
 
     private fun String.toDirection(): Direction = when (this) {
-        "U" -> Direction.UP
-        "R" -> Direction.RIGHT
-        "D" -> Direction.DOWN
-        "L" -> Direction.LEFT
+        "U" -> Direction.SOUTH
+        "R" -> Direction.WEST
+        "D" -> Direction.NORTH
+        "L" -> Direction.EAST
         else -> throw Exception("unknown direction $this")
     }
 

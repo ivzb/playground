@@ -18,10 +18,10 @@ object Graph {
             val delta = prev - current
 
             directions[prev.x][prev.y] = when (delta.invert().toDirection()) {
-                Direction.UP -> '^'
-                Direction.RIGHT -> '<'
-                Direction.DOWN -> 'v'
-                Direction.LEFT -> '>'
+                Direction.SOUTH -> '^'
+                Direction.EAST -> '<'
+                Direction.NORTH -> 'v'
+                Direction.WEST -> '>'
                 else -> error("wrong direction")
             }
         }
