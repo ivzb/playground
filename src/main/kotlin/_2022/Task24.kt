@@ -5,7 +5,6 @@ import readInput
 import utils.Bounds
 import utils.Bounds.Companion.bounds
 import utils.Direction.*
-import utils.Matrix
 import utils.Point
 import java.lang.StringBuilder
 
@@ -18,26 +17,26 @@ object Task24 : Task {
     private const val BLIZZARD_DOWN = 'v'
     private const val BLIZZARD_LEFT = '<'
 
-    private const val NO_SOLUTION = -1
-
     private val SAME_DIRECTION = Point(0, 0)
     private val DIRECTION_DELTAS = (listOf(NORTH, SOUTH, WEST, EAST).map { it.delta } + SAME_DIRECTION)
+
+    private data class Move(val position: Point, val step: Int)
 
     override fun partA() = parseInput()
         .let { input ->
             // build the map
-            val initialState = buildMap(input)
+            val map = buildMap(input)
             val walls = walls(input)
-            val bounds = (initialState.keys + walls).bounds()
+            val bounds = (map.keys + walls).bounds()
 
             // find the cycle with set of states
-            val states = findCycleStates(initialState, bounds)
+            val pattern = findPattern(map, bounds)
 
             // find the shortest path to the end
             val start = Point(1, 0)
             val end = Point(bounds.max.x - 1, bounds.max.y)
 
-            val solution = lookup(start, end, 0, states, walls, bounds)
+            val solution = search(start, end, 0, pattern, walls, bounds)
 
             solution
         }
@@ -45,192 +44,106 @@ object Task24 : Task {
     override fun partB() = parseInput()
         .let { input ->
             // build the map
-            val initialState = buildMap(input)
+            val map = buildMap(input)
             val walls = walls(input)
-            val bounds = (initialState.keys + walls).bounds()
+            val bounds = (map.keys + walls).bounds()
 
             // find the cycle with set of states
-            val states = findCycleStates(initialState, bounds)
+            val pattern = findPattern(map, bounds)
 
             // find the shortest path to the end
             val start = Point(1, 0)
             val end = Point(bounds.max.x - 1, bounds.max.y)
 
-            val solution1 = lookup(start, end, 0, states, walls, bounds)
-            val solution2 = lookup(end, start, solution1, states, walls, bounds)
-            val solution3 = lookup(start, end, solution2, states, walls, bounds)
-
-            println("solution1 = $solution1, steps = $solution1")
-            println("solution2 = $solution2 - steps = ${solution2 - solution1}")
-            println("solution3 = $solution3 - steps = ${solution3 - solution2}")
+            val solution1 = search(start, end, 0, pattern, walls, bounds)
+            val solution2 = search(end, start, solution1, pattern, walls, bounds)
+            val solution3 = search(start, end, solution2, pattern, walls, bounds)
 
             solution3
         }
-
-    data class Move(val from: Point, val to: Point, val step: Int)
-
-    private fun lookup(
-        start: Point,
-        end: Point,
-        initialStep: Int,
-        states: List<Set<Point>>,
-        walls: Set<Point>,
-        bounds: Bounds
-    ): Int {
-
-        val pathsQ = ArrayDeque<List<Point>>()
-        pathsQ.add(listOf(start))
-
-        val solutions = HashSet<List<Point>>()
-        var step = initialStep
-
-        val visited = HashSet<Move>()
-
-        val possibleMoves = HashSet<Move>()
-        val impossibleMoves = HashSet<Move>()
-
-        game@while (true) {
-            val nextPossiblePaths = HashSet<List<Point>>()
-            val stateIndex = (step + 1) % states.size
-            val blizzards = states[stateIndex]
-
-//            Debug.println(printMap(blizzards, walls, bounds, pathsQ))
-
-            while (pathsQ.isNotEmpty()) {
-                val path = pathsQ.removeFirst()
-                val lastPosition = path.last()
-
-                val nextMove = Move(lastPosition, end, step)
-
-                if (visited.contains(nextMove)) {
-                    continue
-                }
-
-                val result = search(lastPosition, end, step + 1, states, walls, bounds)
-
-                if (result != NO_SOLUTION) {
-                    // solution found
-                    return result
-                }
-
-                visited.add(nextMove)
-
-                if (lastPosition == end) {
-                    solutions.add(path)
-                    return result
-                }
-
-                val nextPossiblePossitions = DIRECTION_DELTAS.map { delta -> lastPosition + delta }
-
-                fun Point.isPossibleMove(): Boolean {
-                    return isWithin(bounds) && !walls.contains(this) && !blizzards.contains(this)
-                }
-
-                val nextPaths: List<List<Point>> = nextPossiblePossitions
-                    .map { nextPosition ->
-                        val move = Move(from = lastPosition, to = nextPosition, step = step)
-
-                        if (!possibleMoves.contains(move) && !impossibleMoves.contains(move)) {
-                            if (nextPosition.isPossibleMove()) {
-                                possibleMoves.add(move)
-                            } else {
-                                impossibleMoves.add(move)
-                            }
-                        }
-
-                        move
-                    }
-                    .subtract(impossibleMoves)
-                    .map { move -> path + move.to }
-
-                nextPossiblePaths.addAll(nextPaths)
-            }
-
-            if (nextPossiblePaths.isEmpty()) {
-                error("no solution from (${start.x}, ${start.y}) after $step steps")
-            }
-
-            pathsQ.addAll(nextPossiblePaths)
-            step++
-        }
-    }
 
     private fun search(
         start: Point,
         end: Point,
         initialStep: Int,
-        states: List<Set<Point>>,
+        pattern: List<Set<Point>>,
         walls: Set<Point>,
         bounds: Bounds
     ): Int {
-        val pathsQ = ArrayDeque<List<Point>>()
-        pathsQ.add(listOf(start))
+        val pendingMoves = ArrayDeque<Move>()
+        val visitedMoves = HashSet<Move>()
+        val possibleMoves = HashSet<Move>()
+        val impossibleMoves = HashSet<Move>()
 
-        var step = initialStep
+        val initialMove = Move(start, initialStep + 1)
+        pendingMoves.add(initialMove)
 
-        game@while (true) {
-            if (pathsQ.isEmpty()) {
-                return NO_SOLUTION
+        while (pendingMoves.isNotEmpty()) {
+            val move = pendingMoves.removeFirst()
+            val step = move.step + 1
+
+            if (visitedMoves.contains(move)) {
+                continue
             }
 
-            val nextPossiblePaths = HashSet<Pair<List<Point>, Int>>()
-            val stateIndex = (step + 1) % states.size
-            val blizzards = states[stateIndex]
+            if (move.position == end) {
+                return step - 1
+            }
 
-            while (pathsQ.isNotEmpty()) {
-                val path = pathsQ.removeFirst()
-                val position = path.last()
+            visitedMoves.add(move)
 
-                if (position == end) {
-                    // solution found
-                    return step
-                }
-
-                val nextPossiblePositions = listOf(NORTH, SOUTH, WEST, EAST)
-                    .map { position + it.delta }
-                    .filter {
-                        it.isWithin(bounds) && !walls.contains(it) && !blizzards.contains(it)
+            val nextPositions = DIRECTION_DELTAS.map { delta -> move.position + delta }
+            val blizzards = pattern[step % pattern.size]
+            val nextPossibleMoves: Collection<Move> = nextPositions
+                .map { nextPosition ->
+                    Move(position = nextPosition, step = step).also { move ->
+                        cache(move, nextPosition, possibleMoves, impossibleMoves, bounds, walls, blizzards)
                     }
-
-                val currentPaths = nextPossiblePositions.map {
-                    val distance = Matrix.chebyshevDistance(end, it)
-                    path + it to distance
                 }
+                .subtract(impossibleMoves)
 
-                nextPossiblePaths.addAll(currentPaths)
+            pendingMoves.addAll(nextPossibleMoves)
+        }
+
+        error("no solution found")
+    }
+
+    private fun cache(
+        move: Move,
+        position: Point,
+        possibleMoves: HashSet<Move>,
+        impossibleMoves: HashSet<Move>,
+        bounds: Bounds,
+        walls: Set<Point>,
+        blizzards: Set<Point>
+    ) {
+        if (!possibleMoves.contains(move) && !impossibleMoves.contains(move)) {
+            val isPossibleMove = position.isWithin(bounds) && !walls.contains(position) && !blizzards.contains(position)
+
+            if (isPossibleMove) {
+                possibleMoves.add(move)
+            } else {
+                impossibleMoves.add(move)
             }
-
-            if (nextPossiblePaths.isEmpty()) {
-                return NO_SOLUTION
-            }
-
-            val bestDistance = nextPossiblePaths.minOf { (_, distance) -> distance }
-
-            val bestPositions = nextPossiblePaths
-                .filter { (_, distance) -> distance == bestDistance }
-                .map { (path) -> path }
-
-            pathsQ.addAll(bestPositions)
-            step++
         }
     }
 
-    private fun findCycleStates(
-        initialState: Map<Point, List<Char>>,
+    private fun findPattern(
+        map: Map<Point, List<Char>>,
         bounds: Bounds
     ): List<Set<Point>> {
         val pattern = HashSet<Map<Point, List<Char>>>()
         val states = ArrayList<Set<Point>>()
 
-        var lastState = initialState
+        var blizzards = map
         var position = 0
 
         while (true) {
-            pattern.add(lastState)
-            states.add(HashSet(lastState.keys))
+            pattern.add(blizzards)
+            states.add(HashSet(blizzards.keys))
 
-            val nextState = nextState(lastState, bounds)
-            lastState = nextState
+            val nextState = nextState(blizzards, bounds)
+            blizzards = nextState
             position++
 
             if (pattern.contains(nextState)) {
@@ -285,13 +198,13 @@ object Task24 : Task {
         blizzards: Set<Point>,
         walls: Set<Point>,
         bounds: Bounds,
-        paths: Collection<List<Point>>? = null
+        moves: Collection<Move>? = null
     ): String {
         val sb = StringBuilder()
 
         val positionCounts = HashMap<Point, Int>()
 
-        if (paths != null) {
+        if (moves != null) {
             (bounds.min.y..bounds.max.y).forEach { y ->
                 (bounds.min.x..bounds.max.x).forEach { x ->
                     val position = Point(x, y)
@@ -299,10 +212,9 @@ object Task24 : Task {
                 }
             }
 
-            for (path in paths) {
-                for (position in path) {
-                    positionCounts[position] = positionCounts[position]!! + 1
-                }
+            for (move in moves) {
+                val position = move.position
+                positionCounts[position] = positionCounts[position]!! + 1
             }
         }
 
