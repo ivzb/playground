@@ -72,7 +72,7 @@ object Matrix {
      * 1 . 1
      * 1 1 1
      */
-    private fun chebyshevDistance(p1: Point, p2: Point): Int {
+    fun chebyshevDistance(p1: Point, p2: Point): Int {
         val deltaX = abs(p1.x - p2.x)
         val deltaY = abs(p1.y - p2.y)
         return max(deltaX, deltaY)

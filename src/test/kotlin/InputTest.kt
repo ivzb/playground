@@ -38,6 +38,7 @@ class InputTest {
             _2022.Task21 to (85616733059734L to 3560324848168L),
             _2022.Task22 to (186128 to 34426),
             _2022.Task23 to (3940 to 990),
+            _2022.Task24 to (286 to 820),
         ).forEach { task, (expectedPartA, expectedPartB) ->
             assertEquals(expectedPartA, task.partA())
             assertEquals(expectedPartB, task.partB())
