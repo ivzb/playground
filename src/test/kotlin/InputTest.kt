@@ -39,6 +39,7 @@ class InputTest {
             _2022.Task22 to (186128 to 34426),
             _2022.Task23 to (3940 to 990),
             _2022.Task24 to (286 to 820),
+            _2022.Task25 to ("2=01-0-2-0=-0==-1=01" to Unit),
         ).forEach { task, (expectedPartA, expectedPartB) ->
             assertEquals(expectedPartA, task.partA())
             assertEquals(expectedPartB, task.partB())

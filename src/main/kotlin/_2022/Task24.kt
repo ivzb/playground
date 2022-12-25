@@ -96,9 +96,9 @@ object Task24 : Task {
             val blizzards = pattern[step % pattern.size]
             val nextPossibleMoves: Collection<Move> = nextPositions
                 .map { nextPosition ->
-                    Move(position = nextPosition, step = step).also { move ->
-                        cache(move, nextPosition, possibleMoves, impossibleMoves, bounds, walls, blizzards)
-                    }
+                    val mode = Move(position = nextPosition, step = step)
+                    cache(move, nextPosition, possibleMoves, impossibleMoves, bounds, walls, blizzards)
+                    move
                 }
                 .subtract(impossibleMoves)
 
