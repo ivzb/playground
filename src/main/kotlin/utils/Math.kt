@@ -65,4 +65,19 @@ object Math {
             yield(n)
         }
     }
+
+    private val fibonacciCache by lazy {
+        HashMap<Int, Int>().also {
+            it[0] = 0
+            it[1] = 1
+        }
+    }
+
+    fun fibonacci(n: Int): Int =
+        fibonacciCache.getOrPut(n) {
+            fibonacci(n - 1) + fibonacci(n - 2)
+        }
+
+    fun fibonacci() =
+        generateSequence(0) { n -> n + 1 }.map { n -> fibonacci(n) }
 }
