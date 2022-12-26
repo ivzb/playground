@@ -2,14 +2,11 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = _2022.Task25
+    val task = euler.Task01
 
     measure {
-        task.partA()
-    }
-
-    measure {
-        task.partB()
+        println(task.name)
+        task.solution()
     }
 }
 
