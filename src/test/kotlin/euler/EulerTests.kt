@@ -33,4 +33,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task5_smallest_multiple() {
+        val expected = 232792560
+        val actual = Task05SmallestMultiple.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

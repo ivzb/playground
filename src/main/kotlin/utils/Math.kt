@@ -7,19 +7,21 @@ object Math {
     /**
      * Euclid's algorithm for finding the greatest common divisor of a and b.
      */
-    fun gcd(a: Int, b: Int): Int = if (b == 0) a.absoluteValue else gcd(b, a % b)
-    fun gcd(f: Int, vararg n: Int): Int = n.fold(f, ::gcd)
-    fun Iterable<Int>.gcd(): Int = reduce(::gcd)
+    fun gcd(a: Long, b: Long): Long = if (b == 0L) a.absoluteValue else gcd(b, a % b)
+    fun gcd(f: Long, vararg n: Long): Long = n.fold(f, ::gcd)
+    fun Iterable<Long>.gcd(): Long = reduce(::gcd)
 
 
     /**
      * Find the least common multiple of a and b using the gcd of a and b.
      */
-    fun lcm(a: Int, b: Int): Int =
-        (a * b) / gcd(a, b)
+    fun lcm(a: Long, b: Long): Long = (a * b) / gcd(a, b)
 
-    fun List<Int>.lcm(): Int =
-        this.reduce { acc, n -> lcm(acc, n) }
+    fun List<Int>.lcm(): Int = this.map { it.toLong() }.lcm().toInt()
+    fun IntRange.lcm(): Int = this.toList().lcm()
+
+    fun List<Long>.lcm(): Long = this.reduce { acc, n -> lcm(acc, n) }
+    fun LongRange.lcm(): Long = this.toList().lcm()
 
     infix fun Long.isDivisibleBy(divider: Int): Boolean = this % divider == 0L
 
@@ -110,6 +112,10 @@ object Math {
         }
     }
 
+    fun findPrimesUntil(number: Int): List<Int> {
+        return findPrimes().takeWhile { prime -> prime <= number }.toList()
+    }
+
     fun isPalindrome(n: Int): Boolean {
         return n == reverse(n)
     }
@@ -126,5 +132,7 @@ object Math {
 
         return reverse
     }
+
+    fun List<Int>.product(): Int = this.reduce(Int::times)
 
 }
