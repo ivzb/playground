@@ -3,7 +3,7 @@ package euler
 import EulerTask
 import utils.Math.fibonacci
 
-object Task02 : EulerTask {
+object Task02EvenFibonacciNumbers : EulerTask {
 
     override val name: String = "Even Fibonacci numbers"
 

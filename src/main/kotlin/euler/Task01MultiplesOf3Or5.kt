@@ -2,7 +2,7 @@ package euler
 
 import EulerTask
 
-object Task01 : EulerTask {
+object Task01MultiplesOf3Or5 : EulerTask {
 
     override val name: String = "Multiples of 3 or 5"
 

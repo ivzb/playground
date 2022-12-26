@@ -80,4 +80,34 @@ object Math {
 
     fun fibonacci() =
         generateSequence(0) { n -> n + 1 }.map { n -> fibonacci(n) }
+
+    fun findPrimes() = sequence {
+        val primes = ArrayList<Int>()
+
+        fun isPrime(n: Int): Boolean {
+            var i = 0
+
+            while (i < primes.size && (primes[i] * primes[i]) <= n) {
+                if (n % primes[i] == 0) {
+                    return false
+                }
+
+                i++
+            }
+
+            return true
+        }
+
+        var i = 2
+
+        while (true) {
+            if (isPrime(i)) {
+                primes.add(i)
+                yield(i)
+            }
+
+            i++
+        }
+    }
+
 }
