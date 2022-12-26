@@ -25,4 +25,12 @@ class EulerTests {
         val actual = Task03LargestPrimeFactor.solution()
         Assertions.assertEquals(expected, actual)
     }
+
+    @Test
+    fun task4_largest_palindrome_product() {
+        val expected = 906609
+        val actual = Task04LargestPalindromeProduct.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

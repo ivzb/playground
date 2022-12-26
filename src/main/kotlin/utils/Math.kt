@@ -110,4 +110,21 @@ object Math {
         }
     }
 
+    fun isPalindrome(n: Int): Boolean {
+        return n == reverse(n)
+    }
+
+    fun reverse(n: Int): Int {
+        var remaining = n
+        var reverse = 0
+
+        while (remaining != 0) {
+            reverse *= 10
+            reverse += remaining % 10
+            remaining /= 10
+        }
+
+        return reverse
+    }
+
 }
