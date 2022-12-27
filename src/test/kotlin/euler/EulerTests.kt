@@ -21,7 +21,7 @@ class EulerTests {
 
     @Test
     fun task3_largest_prime_factor() {
-        val expected = 6857
+        val expected = 6857L
         val actual = Task03LargestPrimeFactor.solution()
         Assertions.assertEquals(expected, actual)
     }
@@ -49,7 +49,7 @@ class EulerTests {
 
     @Test
     fun task7_10001st_prime() {
-        val expected = 104743
+        val expected = 104743L
         val actual = Task07_10001stPrime.solution()
         Assertions.assertEquals(expected, actual)
     }
@@ -79,6 +79,13 @@ class EulerTests {
     fun task11_largest_product_in_a_grid() {
         val expected = 70600674L
         val actual = Task11LargestProductInAGrid.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun task12_highly_divisible_triangular_number() {
+        val expected = 76576500L
+        val actual = Task12HighlyDivisibleTriangularNumber.solution()
         Assertions.assertEquals(expected, actual)
     }
 

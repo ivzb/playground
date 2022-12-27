@@ -84,13 +84,13 @@ object Math {
         generateSequence(0) { n -> n + 1 }.map { n -> fibonacci(n) }
 
     fun findPrimes() = sequence {
-        val primes = ArrayList<Int>()
+        val primes = ArrayList<Long>()
 
-        fun isPrime(n: Int): Boolean {
+        fun isPrime(n: Long): Boolean {
             var i = 0
 
             while (i < primes.size && (primes[i] * primes[i]) <= n) {
-                if (n % primes[i] == 0) {
+                if (n % primes[i] == 0L) {
                     return false
                 }
 
@@ -100,7 +100,7 @@ object Math {
             return true
         }
 
-        var i = 2
+        var i = 2L
 
         while (true) {
             if (isPrime(i)) {
@@ -112,7 +112,7 @@ object Math {
         }
     }
 
-    fun findPrimesUntil(number: Int): List<Int> {
+    fun findPrimesUntil(number: Int): List<Long> {
         return findPrimes().takeWhile { prime -> prime <= number }.toList()
     }
 

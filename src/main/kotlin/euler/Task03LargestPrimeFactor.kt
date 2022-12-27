@@ -7,7 +7,7 @@ object Task03LargestPrimeFactor : EulerTask {
 
     override val name: String = "Largest prime factor"
 
-    override fun solution(): Int {
+    override fun solution(): Long {
         val primes = findPrimes().take(1_000).toList()
         var number = 600_851_475_143L
 
