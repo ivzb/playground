@@ -15,5 +15,10 @@ enum class Direction(val delta: Point) {
 
         fun from(delta: Point): Direction =
             values().find { it.delta == delta } ?: error("unknown delta $delta")
+
+        fun distance(distance: Int): List<List<Point>> =
+            Direction.values().map { direction ->
+                (0 until distance).map { i -> direction.delta * i }
+            }
     }
 }

@@ -75,4 +75,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task11_largest_product_in_a_grid() {
+        val expected = 70600674L
+        val actual = Task11LargestProductInAGrid.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

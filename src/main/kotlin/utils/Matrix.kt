@@ -1,5 +1,6 @@
 package utils
 
+import utils.Bounds.Companion.bounds
 import utils.Point.Companion.toPoint
 import java.lang.Math.abs
 import java.lang.Math.max
@@ -14,6 +15,12 @@ object Matrix {
         checkDiagonal && chebyshevDistance(p1, p2) == 1 -> true
         !checkDiagonal && manhattanDistance(p1, p2) == 1 -> true
         else -> false
+    }
+
+    fun adjacent(position: Point, distance: Int, matrixBounds: Bounds): List<List<Point>> {
+        return Direction.distance(distance)
+            .map { it.map { it + position } }
+            .filter { it.bounds().isWithin(matrixBounds) }
     }
 
     // todo: allow taking n params (only near 1 neighbours)
