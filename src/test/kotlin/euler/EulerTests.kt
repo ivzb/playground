@@ -47,4 +47,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task6_10001st_prime() {
+        val expected = 104743
+        val actual = Task0710001stPrime.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
