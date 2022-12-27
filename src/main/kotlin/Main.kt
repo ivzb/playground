@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task0710001stPrime
+    val task = euler.Task08LargestProductInASeries
 
     measure {
         println(task.name)

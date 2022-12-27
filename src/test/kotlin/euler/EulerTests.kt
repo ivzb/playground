@@ -48,9 +48,16 @@ class EulerTests {
     }
 
     @Test
-    fun task6_10001st_prime() {
+    fun task7_10001st_prime() {
         val expected = 104743
-        val actual = Task0710001stPrime.solution()
+        val actual = Task07_10001stPrime.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun task8_largest_product_in_a_series() {
+        val expected = 23514624000
+        val actual = Task08LargestProductInASeries.solution()
         Assertions.assertEquals(expected, actual)
     }
 
