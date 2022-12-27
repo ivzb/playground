@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task05SmallestMultiple
+    val task = euler.Task06SumSquareDifference
 
     measure {
         println(task.name)

@@ -40,4 +40,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task6_sum_square_difference() {
+        val expected = 25164150
+        val actual = Task06SumSquareDifference.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
