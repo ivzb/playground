@@ -135,4 +135,6 @@ object Math {
 
     fun List<Int>.product(): Int = this.reduce(Int::times)
 
+    fun square(n: Int): Int = n * n
+
 }

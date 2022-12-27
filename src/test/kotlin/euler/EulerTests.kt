@@ -61,4 +61,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task9_largest_product_in_a_series() {
+        val expected = 31875000
+        val actual = Task09SpecialPythagoreanTriplet.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

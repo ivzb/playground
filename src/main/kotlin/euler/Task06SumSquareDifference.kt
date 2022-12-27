@@ -1,6 +1,7 @@
 package euler
 
 import EulerTask
+import utils.Math.square
 
 object Task06SumSquareDifference : EulerTask {
 
@@ -14,7 +15,5 @@ object Task06SumSquareDifference : EulerTask {
 
         return square(sum) - sumOfSquares
     }
-
-    private fun square(n: Int): Int = n * n
 
 }

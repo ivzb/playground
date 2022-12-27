@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task08LargestProductInASeries
+    val task = euler.Task09SpecialPythagoreanTriplet
 
     measure {
         println(task.name)
