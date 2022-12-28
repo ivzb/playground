@@ -89,4 +89,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task13_large_sum() {
+        val expected = 5537376230L
+        val actual = Task13LargeSum.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
