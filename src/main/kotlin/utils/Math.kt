@@ -1,5 +1,6 @@
 package utils
 
+import java.math.BigInteger
 import kotlin.math.absoluteValue
 
 object Math {
@@ -136,5 +137,10 @@ object Math {
     fun List<Int>.product(): Int = this.reduce(Int::times)
 
     fun square(n: Int): Int = n * n
+
+    fun factorial(n: Int): BigInteger =
+        (1..n).fold(BigInteger.ONE) { factorial, i ->
+            factorial.multiply(i.toBigInteger())
+        }
 
 }

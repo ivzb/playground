@@ -103,4 +103,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task15_lattice_paths() {
+        val expected = 137846528820
+        val actual = Task15LatticePaths.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

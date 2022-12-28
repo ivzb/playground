@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task14LongestCollatzSequence
+    val task = euler.Task15LatticePaths
 
     measure {
         println(task.name)
