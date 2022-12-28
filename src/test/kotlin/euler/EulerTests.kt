@@ -96,4 +96,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task14_longest_collatz_sequence() {
+        val expected = 837799L
+        val actual = Task14LongestCollatzSequence.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
