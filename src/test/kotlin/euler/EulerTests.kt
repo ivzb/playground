@@ -117,4 +117,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task17_number_letter_counts() {
+        val expected = 21124
+        val actual = Task17NumberLetterCounts.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
