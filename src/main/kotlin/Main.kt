@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task67MaximumPathSumII
+    val task = euler.Task19CountingSundays
 
     measure {
         println(task.name)
