@@ -110,4 +110,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task16_power_of_digit_sum() {
+        val expected = 1366
+        val actual = Task16PowerDigitSum.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task15LatticePaths
+    val task = euler.Task16PowerDigitSum
 
     measure {
         println(task.name)

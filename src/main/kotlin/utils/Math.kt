@@ -143,4 +143,18 @@ object Math {
             factorial.multiply(i.toBigInteger())
         }
 
+    fun binom(n: Int, k: Int): Long {
+        val b = LongArray(n + 1)
+
+        for (i in 0..n) {
+            b[i] = 1
+
+            for (j in i - 1 downTo 1) {
+                b[j] += b[j-1]
+            }
+        }
+
+        return b[k]
+    }
+
 }
