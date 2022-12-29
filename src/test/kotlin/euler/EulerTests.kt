@@ -124,4 +124,10 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task18_maximum_path_sum_I() {
+        val expected = 1074L
+        val actual = Task18MaximumPathSumI.solution()
+        Assertions.assertEquals(expected, actual)
+    }
 }

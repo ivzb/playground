@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task17NumberLetterCounts
+    val task = euler.Task18MaximumPathSumI
 
     measure {
         println(task.name)
