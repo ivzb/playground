@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task20FactorialDigitSum
+    val task = euler.Task21AmicableNumbers
 
     measure {
         println(task.name)
