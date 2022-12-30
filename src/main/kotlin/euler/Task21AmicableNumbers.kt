@@ -1,7 +1,7 @@
 package euler
 
 import EulerTask
-import utils.Math.sumOfDivisors
+import utils.Math.sumOfProperDivisors
 
 object Task21AmicableNumbers : EulerTask {
 
@@ -45,13 +45,13 @@ object Task21AmicableNumbers : EulerTask {
         var sum = 0
 
         for (a in 2 until 10_000) {
-            val b = sumOfDivisors(a)
+            val b = sumOfProperDivisors(a)
 
             if (b > 10_000 || a == b) {
                 continue
             }
 
-            if (a == sumOfDivisors(b)) {
+            if (a == sumOfProperDivisors(b)) {
                 sum += a
             }
         }

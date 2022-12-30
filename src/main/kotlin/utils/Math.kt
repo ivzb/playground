@@ -158,7 +158,7 @@ object Math {
     }
 
     // https://mathschallenge.net/index.php?section=faq&ref=number/sum_of_divisors
-    fun sumOfDivisors(number: Int): Int {
+    fun sumOfProperDivisors(number: Int): Int {
         var n = number
         var sum = 1
         var p = 2
