@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task24LexicographicPermutations
+    val task = euler.Task25_1000DigitFibonacciNumber
 
     measure {
         println(task.name)

@@ -1,7 +1,7 @@
 package utils
 
 import java.math.BigInteger
-import kotlin.math.absoluteValue
+import kotlin.math.*
 
 object Math {
 
@@ -70,19 +70,25 @@ object Math {
     }
 
     private val fibonacciCache by lazy {
-        HashMap<Int, Int>().also {
-            it[0] = 0
-            it[1] = 1
+        HashMap<Int, BigInteger>().also {
+            it[0] = 0.toBigInteger()
+            it[1] = 1.toBigInteger()
         }
     }
 
-    fun fibonacci(n: Int): Int =
+    fun fibonacci(n: Int): BigInteger =
         fibonacciCache.getOrPut(n) {
             fibonacci(n - 1) + fibonacci(n - 2)
         }
 
     fun fibonacci() =
         generateSequence(0) { n -> n + 1 }.map { n -> fibonacci(n) }
+
+    fun fibonacciIndexOf(digits: Int): Int {
+        val phi = (1 + sqrt(5.0)) / 2
+        val limit = ((digits - 1) + log10(5.0) / 2) / log10(phi);
+        return ceil(limit).toInt()
+    }
 
     fun findPrimes() = sequence {
         val primes = ArrayList<Long>()
