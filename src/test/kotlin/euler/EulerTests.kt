@@ -181,6 +181,13 @@ class EulerTests {
     }
 
     @Test
+    fun task26_eeciprocal_cycles() {
+        val expected = 983
+        val actual = Task26ReciprocalCycles.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()

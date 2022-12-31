@@ -197,4 +197,28 @@ object Math {
         return sum - number
     }
 
+    // https://www.geeksforgeeks.org/find-recurring-sequence-fraction/
+    // https://mathworld.wolfram.com/DecimalExpansion.html
+    fun patternInFraction(numerator: Int, denominator: Int): List<Int> {
+        val digits = ArrayList<Int>()
+        val remainders = HashMap<Int, Int>()
+
+        var remainder = numerator % denominator
+
+        while (remainder != 0 && !remainders.contains(remainder)) {
+            remainders[remainder] = digits.size
+            remainder *= 10
+            digits.add(remainder / denominator)
+            remainder %= denominator
+        }
+
+        return if (remainder == 0) {
+            listOf()
+        } else {
+            val startIndex = remainders[remainder] ?: error("undefined remainder")
+            val endIndex = digits.size - 1
+            digits.slice(startIndex..endIndex)
+        }
+    }
+
 }
