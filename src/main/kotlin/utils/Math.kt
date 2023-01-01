@@ -221,4 +221,17 @@ object Math {
         }
     }
 
+    fun Int.digits(): List<Int> {
+        val digits = ArrayList<Int>()
+
+        var n = this
+
+        while (n != 0) {
+            digits.add(n % 10)
+            n /= 10
+        }
+
+        return digits.reversed()
+    }
+
 }

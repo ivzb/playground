@@ -7,7 +7,6 @@ object Task29DistinctPowers : EulerTask("Distinct powers") {
 
     override fun solution(): Int {
         val terms = HashSet<BigInteger>()
-
         val n = 100
 
         for (a in 2..n) {

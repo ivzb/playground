@@ -209,6 +209,13 @@ class EulerTests {
     }
 
     @Test
+    fun task30_digit_fifth_powers() {
+        val expected = 443839
+        val actual = Task30DigitFifthPowers.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
