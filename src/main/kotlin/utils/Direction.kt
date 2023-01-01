@@ -20,5 +20,9 @@ enum class Direction(val delta: Point) {
             Direction.values().map { direction ->
                 (0 until distance).map { i -> direction.delta * i }
             }
+
+        val deltas: List<Point> by lazy {
+            Direction.values().map { it.delta }
+        }
     }
 }

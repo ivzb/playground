@@ -26,6 +26,9 @@ data class Point(val x: Int = 0, val y: Int = 0) {
     fun adjacentTo(deltas: Collection<Point>): List<Point> =
         deltas.map { it + this }
 
+    fun adjacent(): List<Point> =
+        adjacentTo(Direction.deltas)
+
     override fun toString(): String = "($x,$y)"
 
     companion object {
