@@ -188,9 +188,16 @@ class EulerTests {
     }
 
     @Test
-    fun task27_auadratic_primes() {
+    fun task27_quadratic_primes() {
         val expected = -59231
         val actual = Task27QuadraticPrimes.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun task28_number_spiral_diagonals() {
+        val expected = 669171001
+        val actual = Task28NumberSpiralDiagonals.solution()
         Assertions.assertEquals(expected, actual)
     }
 
