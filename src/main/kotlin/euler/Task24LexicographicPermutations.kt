@@ -4,9 +4,7 @@ import EulerTask
 import utils.Combinatorics.lexicographicPermutations
 import utils.Combinatorics.lexicographicPermutationAt
 
-object Task24LexicographicPermutations : EulerTask {
-
-    override val name: String = "Lexicographic permutations"
+object Task24LexicographicPermutations : EulerTask("Lexicographic permutations") {
 
     override fun solution(): String = solution_factorial()
 

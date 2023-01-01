@@ -5,9 +5,7 @@ import readInput
 import utils.Point
 import java.lang.Math.max
 
-object Task67MaximumPathSumII : EulerTask {
-
-    override val name: String = "Maximum path sum II"
+object Task67MaximumPathSumII : EulerTask("Maximum path sum II") {
 
     override fun solution() = solution_bottom_up()
 

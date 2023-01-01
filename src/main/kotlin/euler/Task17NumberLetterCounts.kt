@@ -2,9 +2,7 @@ package euler
 
 import EulerTask
 
-object Task17NumberLetterCounts : EulerTask {
-
-    override val name: String = "Number letter counts"
+object Task17NumberLetterCounts : EulerTask("Number letter counts") {
 
     override fun solution(): Int =
         (1..1000).fold(0) { length, n -> length + spell(n).length }

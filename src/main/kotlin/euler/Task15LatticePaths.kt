@@ -9,9 +9,7 @@ import utils.Point
 import java.lang.StringBuilder
 import java.text.DecimalFormat
 
-object Task15LatticePaths : EulerTask {
-
-    override val name: String = "Lattice paths"
+object Task15LatticePaths : EulerTask("Lattice paths") {
 
     override fun solution(): Long {
         val n = 20

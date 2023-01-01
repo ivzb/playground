@@ -2,9 +2,7 @@ package euler
 
 import EulerTask
 
-object Task14LongestCollatzSequence : EulerTask {
-
-    override val name: String = "Longest Collatz sequence"
+object Task14LongestCollatzSequence : EulerTask("Longest Collatz sequence") {
 
     override fun solution(): Long {
         var max = 0L

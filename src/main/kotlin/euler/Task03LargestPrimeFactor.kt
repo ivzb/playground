@@ -3,9 +3,7 @@ package euler
 import EulerTask
 import utils.Math.findPrimes
 
-object Task03LargestPrimeFactor : EulerTask {
-
-    override val name: String = "Largest prime factor"
+object Task03LargestPrimeFactor : EulerTask("Largest prime factor") {
 
     override fun solution(): Long {
         val primes = findPrimes().take(1_000).toList()

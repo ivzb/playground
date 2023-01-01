@@ -3,9 +3,7 @@ package euler
 import EulerTask
 import utils.Math.square
 
-object Task09SpecialPythagoreanTriplet : EulerTask {
-
-    override val name: String = "Special Pythagorean triplet"
+object Task09SpecialPythagoreanTriplet : EulerTask("Special Pythagorean triplet") {
 
     override fun solution(): Int {
         val sum = 1000

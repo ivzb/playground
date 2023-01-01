@@ -5,9 +5,7 @@ import utils.Math.fibonacci
 import utils.BigInteger.length
 import utils.Math.fibonacciIndexOf
 
-object Task25_1000DigitFibonacciNumber : EulerTask {
-
-    override val name: String = "1000-digit Fibonacci number"
+object Task25_1000DigitFibonacciNumber : EulerTask("1000-digit Fibonacci number") {
 
     override fun solution(): Int = solution_brute_force()
 

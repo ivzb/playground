@@ -3,9 +3,7 @@ package euler
 import EulerTask
 import readInput
 
-object Task22NamesScores : EulerTask {
-
-    override val name: String = "Names scores"
+object Task22NamesScores : EulerTask("Names scores") {
 
     override fun solution(): Int =
         parseInput()

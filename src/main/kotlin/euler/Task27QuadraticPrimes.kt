@@ -3,9 +3,7 @@ package euler
 import EulerTask
 import utils.Math.findPrimes
 
-object Task27QuadraticPrimes : EulerTask {
-
-    override val name: String = "Quadratic primes"
+object Task27QuadraticPrimes : EulerTask("Quadratic primes") {
 
     private val primes = findPrimes().take(1_000).map { it.toInt() }.toSet()
 

@@ -1,6 +1,4 @@
-interface EulerTask {
+abstract class EulerTask(val name: String) {
 
-    val name: String
-
-    fun solution(): Any
+    abstract fun solution(): Any
 }

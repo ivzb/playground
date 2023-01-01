@@ -3,9 +3,7 @@ package euler
 import EulerTask
 import utils.Math.isPalindrome
 
-object Task04LargestPalindromeProduct : EulerTask {
-
-    override val name: String = "Largest palindrome product"
+object Task04LargestPalindromeProduct : EulerTask("Largest palindrome product") {
 
     override fun solution(): Int {
         var bestPalindrome = 0

@@ -8,11 +8,9 @@ import utils.Matrix
 import utils.Point
 import kotlin.math.max
 
-object Task11LargestProductInAGrid : EulerTask {
+object Task11LargestProductInAGrid : EulerTask("Largest product in a grid") {
 
     private const val DISTANCE = 4
-
-    override val name: String = "Largest product in a grid"
 
     override fun solution(): Long =
         parseInput().let { matrix ->

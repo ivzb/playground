@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task28NumberSpiralDiagonals
+    val task = euler.Task29DistinctPowers
 
     measure {
         println(task.name)

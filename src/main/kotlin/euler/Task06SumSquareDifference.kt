@@ -3,9 +3,7 @@ package euler
 import EulerTask
 import utils.Math.square
 
-object Task06SumSquareDifference : EulerTask {
-
-    override val name: String = "Sum square difference"
+object Task06SumSquareDifference : EulerTask("Sum square difference") {
 
     override fun solution(): Int {
         val (sumOfSquares, sum) = (1..100)

@@ -5,9 +5,7 @@ import utils.Direction
 import utils.Matrix.chebyshevDistance
 import utils.Point
 
-object Task28NumberSpiralDiagonals : EulerTask {
-
-    override val name: String = "Number spiral diagonals"
+object Task28NumberSpiralDiagonals : EulerTask("Number spiral diagonals") {
 
     override fun solution(): Int = solution_brute_force()
 

@@ -2,9 +2,7 @@ package euler
 
 import EulerTask
 
-object Task16PowerDigitSum : EulerTask {
-
-    override val name: String = "Power digit sum"
+object Task16PowerDigitSum : EulerTask("Power digit sum") {
 
     override fun solution(): Int {
         var n = 1.toBigInteger().shiftLeft(1000)

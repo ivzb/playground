@@ -4,9 +4,7 @@ import EulerTask
 import utils.Math.patternInFraction
 import java.lang.Math.max
 
-object Task26ReciprocalCycles : EulerTask {
-
-    override val name: String = "Reciprocal cycles"
+object Task26ReciprocalCycles : EulerTask("Reciprocal cycles") {
 
     override fun solution(): Int = solution_brute_force()
 

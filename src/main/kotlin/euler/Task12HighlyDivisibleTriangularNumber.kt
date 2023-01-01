@@ -4,9 +4,7 @@ import EulerTask
 import utils.Math.findPrimes
 import kotlin.math.sqrt
 
-object Task12HighlyDivisibleTriangularNumber : EulerTask {
-
-    override val name: String = "Highly divisible triangular number"
+object Task12HighlyDivisibleTriangularNumber : EulerTask("Highly divisible triangular number") {
 
     val primes = findPrimes().take(1_000).toList()
 

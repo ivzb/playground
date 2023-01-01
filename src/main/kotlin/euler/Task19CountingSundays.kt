@@ -2,9 +2,7 @@ package euler
 
 import EulerTask
 
-object Task19CountingSundays : EulerTask {
-
-    override val name: String = "Counting Sundays"
+object Task19CountingSundays : EulerTask("Counting Sundays") {
 
     override fun solution(): Int {
         var day = 2 // first day of 1901 is Tuesday

@@ -5,11 +5,9 @@ import readInput
 import utils.Math.product
 import kotlin.math.max
 
-object Task08LargestProductInASeries : EulerTask {
+object Task08LargestProductInASeries : EulerTask("Largest product in a series") {
 
     private const val ADJACENT_DIGITS = 13
-
-    override val name: String = "Largest product in a series"
 
     override fun solution(): Long = readInput("euler/08")
         .replace("\n", "")

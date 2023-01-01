@@ -3,9 +3,7 @@ package euler
 import EulerTask
 import readInput
 
-object Task13LargeSum : EulerTask {
-
-    override val name: String = "Large sum"
+object Task13LargeSum : EulerTask("Large sum") {
 
     override fun solution(): Long =
         parseInput().sumOf { it.take(11).toLong() } / 1000

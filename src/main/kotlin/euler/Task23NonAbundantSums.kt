@@ -3,9 +3,7 @@ package euler
 import EulerTask
 import utils.Math.sumOfProperDivisors
 
-object Task23NonAbundantSums : EulerTask {
-
-    override val name: String = "Non-abundant sums"
+object Task23NonAbundantSums : EulerTask("Non-abundant sums") {
 
     private const val LIMIT = 28123
 
