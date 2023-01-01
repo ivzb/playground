@@ -181,9 +181,16 @@ class EulerTests {
     }
 
     @Test
-    fun task26_eeciprocal_cycles() {
+    fun task26_reciprocal_cycles() {
         val expected = 983
         val actual = Task26ReciprocalCycles.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun task27_auadratic_primes() {
+        val expected = -59231
+        val actual = Task27QuadraticPrimes.solution()
         Assertions.assertEquals(expected, actual)
     }
 

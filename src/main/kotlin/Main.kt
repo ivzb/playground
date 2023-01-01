@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task26ReciprocalCycles
+    val task = euler.Task27QuadraticPrimes
 
     measure {
         println(task.name)
