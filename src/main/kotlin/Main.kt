@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task34DigitFactorials
+    val task = euler.Task35CircularPrimes
 
     measure {
         println(task.name)

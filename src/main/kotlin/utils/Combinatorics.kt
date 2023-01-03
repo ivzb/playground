@@ -4,6 +4,23 @@ import utils.Math.factorial
 
 object Combinatorics {
 
+    fun <T> permute(items: List<T>): Sequence<List<T>> = sequence {
+        if (items.size == 1) {
+            yield(items)
+            return@sequence
+        }
+
+        val item = items[0]
+
+        for (permutation in permute(items.drop(1))) {
+            for (i in 0..permutation.size) {
+                val newPermutation = permutation.toMutableList()
+                newPermutation.add(i, item)
+                yield(newPermutation)
+            }
+        }
+    }
+
     fun <T> lexicographicPermutationAt(items: MutableList<T>, n: Int): List<T> {
         val permutation = ArrayList<T>(items.size)
         var target = n - 1
