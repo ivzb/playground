@@ -230,6 +230,13 @@ class EulerTests {
     }
 
     @Test
+    fun task33_digit_cancelling_fractions() {
+        val expected = 100L
+        val actual = Task33DigitCancellingFractions.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
