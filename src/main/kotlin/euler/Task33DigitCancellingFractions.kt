@@ -38,4 +38,5 @@ object Task33DigitCancellingFractions : EulerTask("Digit cancelling fractions") 
 
         return fraction.decimal == accidentalFraction.decimal
     }
+
 }

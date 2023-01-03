@@ -144,9 +144,13 @@ object Math {
 
     fun square(n: Int): Int = n * n
 
+    private val factorialCache = HashMap<Int, BigInteger>()
+
     fun factorial(n: Int): BigInteger =
-        (1..n).fold(BigInteger.ONE) { factorial, i ->
-            factorial.multiply(i.toBigInteger())
+        factorialCache.getOrPut(n) {
+            (1..n).fold(BigInteger.ONE) { factorial, i ->
+                factorial.multiply(i.toBigInteger())
+            }
         }
 
     fun binom(n: Int, k: Int): Long {

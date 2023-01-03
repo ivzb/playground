@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task33DigitCancellingFractions
+    val task = euler.Task34DigitFactorials
 
     measure {
         println(task.name)
