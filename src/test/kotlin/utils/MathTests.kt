@@ -2,6 +2,7 @@ package utils
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import utils.Math.isPalindrome
 
 class MathTests {
 
@@ -14,8 +15,8 @@ class MathTests {
 
     @Test
     fun isPalindrome() {
-        listOf(3, 66, 101, 9009, 50905).forEach { palindrome -> assertTrue(Math.isPalindrome(palindrome)) }
-        listOf(65, 103, 9019, 51905).forEach { palindrome -> assertFalse(Math.isPalindrome(palindrome)) }
+        listOf(3, 66, 101, 9009, 50905).forEach { palindrome -> assertTrue(palindrome.isPalindrome()) }
+        listOf(65, 103, 9019, 51905).forEach { nonPalindrome -> assertFalse(nonPalindrome.isPalindrome()) }
     }
 
     @Test

@@ -251,6 +251,13 @@ class EulerTests {
     }
 
     @Test
+    fun task36_double_base_palindromes() {
+        val expected = 872187
+        val actual = Task36DoubleBasePalindromes.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()

@@ -123,8 +123,12 @@ object Math {
         return findPrimes().takeWhile { prime -> prime <= number }.toList()
     }
 
-    fun isPalindrome(n: Int): Boolean {
-        return n == reverse(n)
+    fun Int.toBinary(): String = Integer.toBinaryString(this)
+
+    fun String.isPalindrome(): Boolean = this == this.reversed()
+
+    fun Int.isPalindrome(): Boolean {
+        return this == reverse(this)
     }
 
     fun reverse(n: Int): Int {

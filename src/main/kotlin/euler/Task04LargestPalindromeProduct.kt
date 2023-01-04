@@ -14,7 +14,7 @@ object Task04LargestPalindromeProduct : EulerTask("Largest palindrome product") 
             for (b in range) {
                 val product = a * b
 
-                if (isPalindrome(product) && product > bestPalindrome) {
+                if (product.isPalindrome() && product > bestPalindrome) {
                     bestPalindrome = product
                 }
             }
