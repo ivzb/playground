@@ -258,6 +258,13 @@ class EulerTests {
     }
 
     @Test
+    fun task37_truncatable_primes() {
+        val expected = 748317L
+        val actual = Task37TruncatablePrimes.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()

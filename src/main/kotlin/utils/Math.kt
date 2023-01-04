@@ -123,19 +123,37 @@ object Math {
         return findPrimes().takeWhile { prime -> prime <= number }.toList()
     }
 
-    fun Int.toBinary(): String = Integer.toBinaryString(this)
+    fun Int.isPalindrome(base: Int = 10): Boolean {
+        val n = this
+        var reversed = 0
+        var k = n
 
-    fun String.isPalindrome(): Boolean = this == this.reversed()
+        while (k > 0) {
+            reversed = base*reversed + (k % base)
+            k /= base
+        }
 
-    fun Int.isPalindrome(): Boolean {
-        return this == reverse(this)
+        return n == reversed
     }
 
-    fun reverse(n: Int): Int {
-        var remaining = n
+    fun Int.reversed(): Int {
+        var remaining = this
         var reverse = 0
 
         while (remaining != 0) {
+            reverse *= 10
+            reverse += remaining % 10
+            remaining /= 10
+        }
+
+        return reverse
+    }
+
+    fun Long.reversed(): Long {
+        var remaining = this
+        var reverse = 0L
+
+        while (remaining != 0L) {
             reverse *= 10
             reverse += remaining % 10
             remaining /= 10

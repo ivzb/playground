@@ -3,6 +3,7 @@ package utils
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import utils.Math.isPalindrome
+import utils.Math.reversed
 
 class MathTests {
 
@@ -27,7 +28,7 @@ class MathTests {
             23 to 32,
             123 to 321
         ).forEach { (input, expected) ->
-            val actual = Math.reverse(input)
+            val actual = input.reversed()
             assertEquals(expected, actual)
         }
     }
