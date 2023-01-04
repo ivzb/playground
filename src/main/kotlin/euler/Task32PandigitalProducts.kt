@@ -1,23 +1,24 @@
 package euler
 
 import EulerTask
+import utils.Math.isPandigital
 
 object Task32PandigitalProducts : EulerTask("Pandigital products") {
 
-    override fun solution(): Int {
-        val products = HashSet<Int>()
+    override fun solution(): Long {
+        val products = HashSet<Long>()
 
-        for (multiplicand in 1..1_000) {
-            if (!isPandigital(multiplicand)) continue
+        for (multiplicand in 1..1_000L) {
+            if (!multiplicand.isPandigital()) continue
             val multiplicandDigits = multiplicand.toString().toSet()
 
-            for (multiplier in multiplicand..2_000) {
-                if (!isPandigital(multiplier)) continue
+            for (multiplier in multiplicand..2_000L) {
+                if (!multiplier.isPandigital()) continue
                 val multiplierDigits = multiplier.toString().toSet()
 
                 val product = multiplicand * multiplier
 
-                if (!isPandigital(product)) continue
+                if (!product.isPandigital()) continue
                 val productDigits = product.toString().toSet()
 
                 val distinctDigits: Set<Char> = multiplicandDigits + multiplierDigits + productDigits
@@ -32,12 +33,5 @@ object Task32PandigitalProducts : EulerTask("Pandigital products") {
         return products.sum()
     }
 
-    private val cache = HashMap<Int, Boolean>()
-
-    private fun isPandigital(number: Int): Boolean =
-        cache.getOrPut(number) {
-            val n = number.toString().toCharArray()
-            n.size == n.distinct().size
-        }
 
 }

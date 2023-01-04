@@ -224,7 +224,7 @@ class EulerTests {
 
     @Test
     fun task32_pandigital_products() {
-        val expected = 45228
+        val expected = 45228L
         val actual = Task32PandigitalProducts.solution()
         Assertions.assertEquals(expected, actual)
     }
@@ -261,6 +261,13 @@ class EulerTests {
     fun task37_truncatable_primes() {
         val expected = 748317L
         val actual = Task37TruncatablePrimes.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun task38_pandigital_multiples() {
+        val expected = 932718654L
+        val actual = Task38PandigitalMultiples.solution()
         Assertions.assertEquals(expected, actual)
     }
 

@@ -273,4 +273,12 @@ object Math {
         return digits.reversed()
     }
 
+    private val pandigitalCache = HashMap<Long, Boolean>()
+
+    fun Long.isPandigital(): Boolean =
+        pandigitalCache.getOrPut(this) {
+            val n = this.toString().toCharArray()
+            !n.contains('0') && n.size == n.distinct().size
+        }
+
 }
