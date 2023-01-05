@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task41PandigitalPrime
+    val task = euler.Task42CodedTriangleNumbers
 
     measure {
         println(task.name)
