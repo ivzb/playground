@@ -307,6 +307,13 @@ class EulerTests {
     }
 
     @Test
+    fun task44_pentagon_numbers() {
+        val expected = 5482660
+        val actual = Task44PentagonNumbers.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
