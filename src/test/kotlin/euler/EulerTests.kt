@@ -300,6 +300,13 @@ class EulerTests {
     }
 
     @Test
+    fun task43_sub_string_divisibility() {
+        val expected = 16695334890L
+        val actual = Task43SubStringDivisibility.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()

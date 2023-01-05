@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task42CodedTriangleNumbers
+    val task = euler.Task43SubStringDivisibility
 
     measure {
         println(task.name)

@@ -2,6 +2,7 @@ package euler
 
 import EulerTask
 import readInput
+import utils.toLong
 
 object Task13LargeSum : EulerTask("Large sum") {
 
@@ -39,7 +40,7 @@ object Task13LargeSum : EulerTask("Large sum") {
             carryOver /= 10
         }
 
-        return number.reversed().take(10).joinToString("").toLong()
+        return number.reversed().take(10).toLong()
     }
 
     private fun parseInput(): List<String> =

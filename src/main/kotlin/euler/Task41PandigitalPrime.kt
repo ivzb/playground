@@ -4,6 +4,7 @@ import EulerTask
 import utils.Combinatorics.permute
 import utils.Math.findPrimesUntil
 import utils.Math.isConsecutivePandigital
+import utils.toLong
 import java.lang.Math.max
 
 object Task41PandigitalPrime : EulerTask("Pandigital prime") {
@@ -28,7 +29,7 @@ object Task41PandigitalPrime : EulerTask("Pandigital prime") {
         var best = 0L
 
         permute(listOf(7,6,5,4,3,2,1)).forEach { permutation ->
-            val n = permutation.joinToString("").toLong()
+            val n = permutation.toLong()
 
             if (primes.contains(n) && n.isConsecutivePandigital()) {
                 best = max(best, n)
