@@ -286,6 +286,13 @@ class EulerTests {
     }
 
     @Test
+    fun task41_pandigital_prime() {
+        val expected = 7652413L
+        val actual = Task41PandigitalPrime.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()

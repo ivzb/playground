@@ -281,4 +281,14 @@ object Math {
             !n.contains('0') && n.size == n.distinct().size
         }
 
+    private val ConsecutivePandigitalCache = HashMap<Long, Boolean>()
+
+    fun Long.isConsecutivePandigital(): Boolean =
+        ConsecutivePandigitalCache.getOrPut(this) {
+            val digits = this.toString().toCharArray().map { it.digitToInt() }
+            val distinctDigits = digits.toSet()
+            val consecutiveDigits = (1..digits.size).toSet()
+            return digits.size == distinctDigits.size && distinctDigits.subtract(consecutiveDigits).isEmpty()
+        }
+
 }
