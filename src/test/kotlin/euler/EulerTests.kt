@@ -272,6 +272,13 @@ class EulerTests {
     }
 
     @Test
+    fun task39_integer_right_triangles() {
+        val expected = 840
+        val actual = Task39IntegerRightTriangles.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
