@@ -335,6 +335,13 @@ class EulerTests {
     }
 
     @Test
+    fun task48_self_powers() {
+        val expected = 9110846700L
+        val actual = Task48SelfPowers.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
