@@ -308,8 +308,15 @@ class EulerTests {
 
     @Test
     fun task44_pentagon_numbers() {
-        val expected = 5482660
+        val expected = 5482660L
         val actual = Task44PentagonNumbers.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun task45_triangular_pentagonal_and_hexagonal() {
+        val expected = 1533776805L
+        val actual = Task45TriangularPentagonalAndHexagonal.solution()
         Assertions.assertEquals(expected, actual)
     }
 

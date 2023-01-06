@@ -129,7 +129,7 @@ object Math {
         var k = n
 
         while (k > 0) {
-            reversed = base*reversed + (k % base)
+            reversed = base * reversed + (k % base)
             k /= base
         }
 
@@ -290,5 +290,9 @@ object Math {
             val consecutiveDigits = (1..digits.size).toSet()
             return digits.size == distinctDigits.size && distinctDigits.subtract(consecutiveDigits).isEmpty()
         }
+
+    fun triangularNumber(n: Long): Long = n * (n + 1) / 2
+    fun pentagonNumber(n: Long): Long = n * (3 * n - 1) / 2
+    fun hexagonalNumber(n: Long): Long = n * (2 * n - 1)
 
 }

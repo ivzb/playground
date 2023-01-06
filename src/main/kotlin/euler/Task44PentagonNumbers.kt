@@ -1,11 +1,12 @@
 package euler
 
 import EulerTask
+import utils.Math.pentagonNumber
 
 object Task44PentagonNumbers : EulerTask("Pentagon numbers") {
 
-    override fun solution(): Int {
-        val pentagonNumbers = (1..3_000).map { n -> pentagonNumber(n) }.toSet()
+    override fun solution(): Long {
+        val pentagonNumbers = (1..3_000L).map { n -> pentagonNumber(n) }.toSet()
 
         for (j in pentagonNumbers) {
             for (k in pentagonNumbers) {
@@ -16,10 +17,6 @@ object Task44PentagonNumbers : EulerTask("Pentagon numbers") {
         }
 
         return -1
-    }
-
-    private fun pentagonNumber(n: Int): Int {
-        return n * (3 * n - 1) / 2
     }
 
 }
