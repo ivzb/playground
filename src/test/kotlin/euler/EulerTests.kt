@@ -349,6 +349,13 @@ class EulerTests {
     }
 
     @Test
+    fun task50_consecutive_prime_sum() {
+        val expected = 997651L
+        val actual = Task50ConsecutivePrimeSum.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
