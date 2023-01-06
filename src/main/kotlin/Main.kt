@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task45TriangularPentagonalAndHexagonal
+    val task = euler.Task46GoldbachsOtherConjecture
 
     measure {
         println(task.name)
