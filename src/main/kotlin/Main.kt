@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task46GoldbachsOtherConjecture
+    val task = euler.Task47DistinctPrimesFactors
 
     measure {
         println(task.name)

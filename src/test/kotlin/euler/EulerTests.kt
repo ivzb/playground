@@ -328,6 +328,13 @@ class EulerTests {
     }
 
     @Test
+    fun task47_distinct_primes_factors() {
+        val expected = 134043L
+        val actual = Task47DistinctPrimesFactors.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
