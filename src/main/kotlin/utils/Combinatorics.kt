@@ -75,4 +75,29 @@ object Combinatorics {
         // Successfully computed the next permutation
         return true
     }
+
+    fun isPermutation(n1: Long, n2: Long): Boolean {
+        val digits = IntArray(10)
+
+        var n1 = n1
+        var n2 = n2
+
+        while (n1 != 0L) {
+            digits[(n1 % 10).toInt()]++
+            n1 /= 10
+        }
+
+        while (n2 != 0L) {
+            digits[(n2 % 10).toInt()]--
+            n2 /= 10
+        }
+
+        for (digit in digits) {
+            if (digit != 0) {
+                return false
+            }
+        }
+
+        return true
+    }
 }

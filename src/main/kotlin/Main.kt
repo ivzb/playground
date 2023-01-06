@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task48SelfPowers
+    val task = euler.Task49PrimePermutations
 
     measure {
         println(task.name)
