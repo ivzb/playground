@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task50ConsecutivePrimeSum
+    val task = euler.Task51PrimeDigitReplacements
 
     measure {
         println(task.name)
