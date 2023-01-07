@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task52PermutedMultiples
+    val task = euler.Task53CombinatoricSelections
 
     measure {
         println(task.name)

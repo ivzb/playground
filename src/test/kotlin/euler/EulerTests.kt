@@ -363,6 +363,20 @@ class EulerTests {
     }
 
     @Test
+    fun task52_permuted_multiples() {
+        val expected = 142857L
+        val actual = Task52PermutedMultiples.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun task53_combinatoric_selections() {
+        val expected = 4075
+        val actual = Task53CombinatoricSelections.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()

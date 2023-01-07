@@ -19,23 +19,23 @@ object Task15LatticePaths : EulerTask("Lattice paths") {
     }
 
     fun binom_solution(): Long {
-        return binom(40, 20)
+        return binom(40, 20).toLong()
     }
 
     fun pascal_solution(): Long {
         val n = 20 // must be 1 more than the grid we're evaluating with this approach
         val arr = Array(n) { LongArray(n) }
 
-        // filling the array with pascal's triagle values
+        // filling the array with pascal's triangle values
         for (i in 0 until n) {
-            // outer values set to 1(must be ommited for the solution)
+            // outer values set to 1 (must be omited for the solution)
             arr[0][i] = 1
             arr[i][0] = 1
         }
 
         for (c in 1 until n) {
             for (i in 1 until n) {
-                arr[i][c] = arr[i][c - 1] + arr[i - 1][c];
+                arr[i][c] = arr[i][c - 1] + arr[i - 1][c]
             }
         }
 

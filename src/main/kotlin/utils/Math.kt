@@ -175,18 +175,21 @@ object Math {
             }
         }
 
-    fun binom(n: Int, k: Int): Long {
-        val b = LongArray(n + 1)
-
-        for (i in 0..n) {
-            b[i] = 1
-
-            for (j in i - 1 downTo 1) {
-                b[j] += b[j - 1]
-            }
+    fun binom(n: Long, k: Long): BigInteger {
+        if (k > n) {
+            return BigInteger.ZERO
         }
 
-        return b[k]
+        val n = n.toBigInteger()
+        var c = n
+
+        for (i in 1..k) {
+            val i = i.toBigInteger()
+            c *= n - i
+            c /= i + BigInteger.ONE
+        }
+
+        return c
     }
 
     // https://mathschallenge.net/index.php?section=faq&ref=number/sum_of_divisors
