@@ -136,6 +136,32 @@ object Math {
         return n == reversed
     }
 
+    fun Long.isPalindrome(base: Long = 10): Boolean {
+        val n = this
+        var reversed = 0L
+        var k = n
+
+        while (k > 0) {
+            reversed = base * reversed + (k % base)
+            k /= base
+        }
+
+        return n == reversed
+    }
+
+    fun BigInteger.isPalindrome(base: BigInteger = 10.toBigInteger()): Boolean {
+        val n = this
+        var reversed = BigInteger.ZERO
+        var k = n
+
+        while (k > BigInteger.ZERO) {
+            reversed = base * reversed + (k % base)
+            k /= base
+        }
+
+        return n == reversed
+    }
+
     fun Int.reversed(): Int {
         var remaining = this
         var reverse = 0
@@ -157,6 +183,20 @@ object Math {
             reverse *= 10
             reverse += remaining % 10
             remaining /= 10
+        }
+
+        return reverse
+    }
+
+    fun BigInteger.reversed(): BigInteger {
+        var remaining = this
+        var reverse = BigInteger.ZERO
+        val ten = 10.toBigInteger()
+
+        while (remaining != BigInteger.ZERO) {
+            reverse *= ten
+            reverse += remaining.mod(ten)
+            remaining /= ten
         }
 
         return reverse
