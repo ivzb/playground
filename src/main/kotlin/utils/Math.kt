@@ -12,11 +12,14 @@ object Math {
     fun gcd(f: Long, vararg n: Long): Long = n.fold(f, ::gcd)
     fun Iterable<Long>.gcd(): Long = reduce(::gcd)
 
+    fun gcd(a: BigInteger, b: BigInteger): BigInteger = if (b == BigInteger.ZERO) a.abs() else gcd(b, a % b)
+
 
     /**
      * Find the least common multiple of a and b using the gcd of a and b.
      */
     fun lcm(a: Long, b: Long): Long = (a * b) / gcd(a, b)
+    fun lcm(a: BigInteger, b: BigInteger): BigInteger = (a * b) / gcd(a, b)
 
     fun List<Int>.lcm(): Int = this.map { it.toLong() }.lcm().toInt()
     fun IntRange.lcm(): Int = this.toList().lcm()

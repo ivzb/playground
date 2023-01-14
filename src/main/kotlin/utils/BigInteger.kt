@@ -3,7 +3,4 @@ package utils
 import java.math.BigInteger
 import kotlin.math.ceil
 
-object BigInteger {
-
-    fun BigInteger.length() = ceil(bitLength() / 3.32192809).toInt()
-}
+fun BigInteger.length() = ceil(bitLength() / 3.32192809).toInt()

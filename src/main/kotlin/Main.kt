@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task56PowerfulDigitSum
+    val task = euler.Task57SquareRootConvergents
 
     measure {
         println(task.name)

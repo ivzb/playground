@@ -23,7 +23,7 @@ object Task33DigitCancellingFractions : EulerTask("Digit cancelling fractions") 
             }
         }
 
-        return product.simplified.denominator
+        return product.simplified.denominator.toLong()
     }
 
     private fun anomalousCancellation(fraction: Fraction): Boolean {

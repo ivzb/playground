@@ -398,6 +398,13 @@ class EulerTests {
     }
 
     @Test
+    fun task57_square_root_convergents() {
+        val expected = 153
+        val actual = Task57SquareRootConvergents.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()

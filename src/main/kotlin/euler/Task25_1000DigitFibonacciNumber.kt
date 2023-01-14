@@ -2,8 +2,8 @@ package euler
 
 import EulerTask
 import utils.Math.fibonacci
-import utils.BigInteger.length
 import utils.Math.fibonacciIndexOf
+import utils.length
 
 object Task25_1000DigitFibonacciNumber : EulerTask("1000-digit Fibonacci number") {
 
