@@ -377,6 +377,13 @@ class EulerTests {
     }
 
     @Test
+    fun task54_poker_hands() {
+        val expected = 376
+        val actual = Task54PokerHands.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
