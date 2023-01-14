@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task55LychrelNumbers
+    val task = euler.Task56PowerfulDigitSum
 
     measure {
         println(task.name)

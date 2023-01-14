@@ -316,6 +316,20 @@ object Math {
         return digits.reversed()
     }
 
+    fun BigInteger.digits(): List<BigInteger> {
+        val digits = ArrayList<BigInteger>()
+
+        var n = this
+        val ten = 10.toBigInteger()
+
+        while (n != BigInteger.ZERO) {
+            digits.add(n.mod(ten))
+            n /= ten
+        }
+
+        return digits.reversed()
+    }
+
     private val pandigitalCache = HashMap<Long, Boolean>()
 
     fun Long.isPandigital(): Boolean =
