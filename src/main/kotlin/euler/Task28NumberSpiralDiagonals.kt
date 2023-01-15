@@ -57,7 +57,7 @@ object Task28NumberSpiralDiagonals : EulerTask("Number spiral diagonals") {
     }
 
     /**
-     * For n by n grid, and n being odd, the number in the top right corner is n^2.
+     * For n by n grid, rotating clockwise, and n being odd, the number in the top right corner is n^2.
      * The other corners are given by: n^2-n+1, n^2-2n+2, and n^2-3n+3.
      * Adding these together gives the quadratic, 4n^2-6n+6.
      * Then create a loop from 3 to 1001 in steps of 2 and find the running total (starting from 1) of the quadratic.

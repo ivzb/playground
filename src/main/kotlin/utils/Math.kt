@@ -1,5 +1,6 @@
 package utils
 
+import euler.Task58SpiralPrimes
 import java.math.BigInteger
 import kotlin.math.*
 
@@ -93,27 +94,41 @@ object Math {
         return ceil(limit).toInt()
     }
 
-    fun findPrimes() = sequence {
-        val primes = ArrayList<Long>()
+    fun isPrime(n: Long): Boolean {
+        var i = 2
 
-        fun isPrime(n: Long): Boolean {
-            var i = 0
-
-            while (i < primes.size && (primes[i] * primes[i]) <= n) {
-                if (n % primes[i] == 0L) {
-                    return false
-                }
-
-                i++
+        while (i <= sqrt(n.toDouble()).toInt()) {
+            if (n % i == 0L) {
+                return false
             }
 
-            return true
+            i++
         }
+
+        return true
+    }
+
+    fun isPrime(n: Long, primes: List<Long>): Boolean {
+        var i = 0
+
+        while (i < primes.size && (primes[i] * primes[i]) <= n) {
+            if (n % primes[i] == 0L) {
+                return false
+            }
+
+            i++
+        }
+
+        return true
+    }
+
+    fun findPrimes() = sequence {
+        val primes = ArrayList<Long>()
 
         var i = 2L
 
         while (true) {
-            if (isPrime(i)) {
+            if (isPrime(i, primes)) {
                 primes.add(i)
                 yield(i)
             }
