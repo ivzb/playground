@@ -1,12 +1,12 @@
 package euler
 
 import EulerTask
-import utils.Math.pentagonNumber
+import utils.Math.pentagonalNumber
 
 object Task44PentagonNumbers : EulerTask("Pentagon numbers") {
 
     override fun solution(): Long {
-        val pentagonNumbers = (1..3_000L).map { n -> pentagonNumber(n) }.toSet()
+        val pentagonNumbers = (1..3_000L).map { n -> pentagonalNumber(n) }.toSet()
 
         for (j in pentagonNumbers) {
             for (k in pentagonNumbers) {

@@ -426,6 +426,13 @@ class EulerTests {
     }
 
     @Test
+    fun task61_cyclical_figurate_numbers() {
+        val expected = 28684L
+        val actual = Task61CyclicalFigurateNumbers.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
