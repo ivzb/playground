@@ -419,6 +419,13 @@ class EulerTests {
     }
 
     @Test
+    fun task60_prime_pair_sets() {
+        val expected = 26033L
+        val actual = Task60PrimePairSets.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
