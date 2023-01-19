@@ -433,6 +433,13 @@ class EulerTests {
     }
 
     @Test
+    fun task62_cubic_permutations() {
+        val expected = 127035954683L
+        val actual = Task62CubicPermutations.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()
