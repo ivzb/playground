@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task62CubicPermutations
+    val task = euler.Task63PowerfulDigitCounts
 
     measure {
         println(task.name)
