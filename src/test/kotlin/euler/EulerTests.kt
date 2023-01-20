@@ -440,6 +440,20 @@ class EulerTests {
     }
 
     @Test
+    fun task63_odd_period_square_roots() {
+        val expected = 49
+        val actual = Task63PowerfulDigitCounts.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun task64_odd_period_square_roots() {
+        val expected = 1322
+        val actual = Task64OddPeriodSquareRoots.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
     fun task67_maximum_path_sum_II() {
         val expected = 7273L
         val actual = Task67MaximumPathSumII.solution()

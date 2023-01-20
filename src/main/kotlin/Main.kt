@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task63PowerfulDigitCounts
+    val task = euler.Task64OddPeriodSquareRoots
 
     measure {
         println(task.name)

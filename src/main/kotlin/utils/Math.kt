@@ -1,6 +1,9 @@
 package utils
 
+import java.math.BigDecimal
 import java.math.BigInteger
+import java.math.MathContext
+import java.math.RoundingMode
 import kotlin.math.*
 
 object Math {
@@ -371,5 +374,36 @@ object Math {
     fun hexagonalNumber(n: Long): Long = n * (2 * n - 1)
     fun heptagonalNumber(n: Long): Long = n * (5 * n - 3) / 2
     fun octagonalNumber(n: Long): Long = n * (3 * n - 2)
+
+    /** Find the continued fraction sequence for sqrt(n).
+     * This returns a list of integers, [a0, a1, a2, ...]
+     * @params n Number to compute the square root of.
+     */
+    fun continuedFractionSqrt(n: Int): List<Int> {
+        if (isPerfectSquare(n)) {
+            return listOf()
+        }
+
+        val period = ArrayList<Int>()
+        val a0 = sqrt(n.toDouble()).toInt()
+        val b0 = a0
+        var b = a0
+        val c0 = n - a0 * a0
+        var c = c0
+
+        do {
+            val a = (a0 + b) / c
+            b = a * c - b
+            c = (n - b * b) / c
+            period.add(a)
+        } while (b != b0 || c != c0)
+
+        return period
+    }
+
+    fun isPerfectSquare(n: Int): Boolean {
+        val s = round(sqrt(n.toDouble())).toInt()
+        return n == s * s
+    }
 
 }
