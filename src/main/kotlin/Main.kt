@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task65ConvergentsOfE
+    val task = euler.Task66DiophantineEquation
 
     measure {
         println(task.name)

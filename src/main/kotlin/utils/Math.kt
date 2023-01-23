@@ -406,4 +406,26 @@ object Math {
         return n == s * s
     }
 
+    fun pellsEquation(n: Int): Fraction {
+        var continuedFraction = continuedFractionSqrt(n)
+
+        if (continuedFraction.size % 2 != 0) {
+            continuedFraction = continuedFraction + continuedFraction
+        }
+
+        continuedFraction = continuedFraction.dropLast(1)
+
+        var fraction = Fraction(0.toBigInteger(), 1.toBigInteger())
+
+        for (convergent in continuedFraction.size - 1 downTo 0) {
+            val term = continuedFraction[convergent].toBigInteger()
+            fraction = Fraction(fraction.denominator, fraction.numerator + (term * fraction.denominator))
+        }
+
+        val term = sqrt(n.toDouble()).toInt().toBigInteger()
+        fraction = Fraction(fraction.numerator + (term * fraction.denominator), fraction.denominator)
+
+        return fraction
+    }
+
 }
