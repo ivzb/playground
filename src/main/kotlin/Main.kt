@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task66DiophantineEquation
+    val task = euler.Task68Magic5gonRing
 
     measure {
         println(task.name)

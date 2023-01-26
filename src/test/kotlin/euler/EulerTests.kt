@@ -466,4 +466,11 @@ class EulerTests {
         val actual = Task67MaximumPathSumII.solution()
         Assertions.assertEquals(expected, actual)
     }
+
+    @Test
+    fun task68_magic_5gon_ring() {
+        val expected = "6531031914842725"
+        val actual = Task68Magic5gonRing.solution()
+        Assertions.assertEquals(expected, actual)
+    }
 }
