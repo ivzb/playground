@@ -487,4 +487,11 @@ class EulerTests {
         val actual = Task70TotientPermutation.solution()
         Assertions.assertEquals(expected, actual)
     }
+
+    @Test
+    fun task71_ordered_fractions() {
+        val expected = 428570
+        val actual = Task71OrderedFractions.solution()
+        Assertions.assertEquals(expected, actual)
+    }
 }
