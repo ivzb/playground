@@ -473,4 +473,11 @@ class EulerTests {
         val actual = Task68Magic5gonRing.solution()
         Assertions.assertEquals(expected, actual)
     }
+
+    @Test
+    fun task69_totient_maximum() {
+        val expected = 510510L
+        val actual = Task69TotientMaximum.solution()
+        Assertions.assertEquals(expected, actual)
+    }
 }

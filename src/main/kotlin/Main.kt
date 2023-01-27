@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task68Magic5gonRing
+    val task = euler.Task69TotientMaximum
 
     measure {
         println(task.name)
