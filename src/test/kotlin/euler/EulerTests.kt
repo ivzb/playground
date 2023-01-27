@@ -480,4 +480,11 @@ class EulerTests {
         val actual = Task69TotientMaximum.solution()
         Assertions.assertEquals(expected, actual)
     }
+
+    @Test
+    fun task70_totient_permutation() {
+        val expected = 8319823L
+        val actual = Task70TotientPermutation.solution()
+        Assertions.assertEquals(expected, actual)
+    }
 }

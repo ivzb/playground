@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task69TotientMaximum
+    val task = euler.Task70TotientPermutation
 
     measure {
         println(task.name)
