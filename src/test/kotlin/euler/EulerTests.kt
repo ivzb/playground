@@ -502,4 +502,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task73_counting_fractions_in_a_range() {
+        val expected = 7295372
+        val actual = Task73CountingFractionsInARange.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
