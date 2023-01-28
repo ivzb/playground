@@ -509,4 +509,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task74_digit_factorial_chains() {
+        val expected = 402
+        val actual = Task74DigitFactorialChains.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
