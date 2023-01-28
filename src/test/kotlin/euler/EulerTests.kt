@@ -494,4 +494,12 @@ class EulerTests {
         val actual = Task71OrderedFractions.solution()
         Assertions.assertEquals(expected, actual)
     }
+
+    @Test
+    fun task72_counting_fractions() {
+        val expected = 303963552391
+        val actual = Task72CountingFractions.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
