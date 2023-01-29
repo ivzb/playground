@@ -516,4 +516,12 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task75_singular_integer_right_triangles() {
+        val expected = 161667
+        val actual = Task75SingularIntegerRightTriangles.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+
 }
