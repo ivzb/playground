@@ -523,5 +523,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task76_counting_summations() {
+        val expected = 190569291
+        val actual = Task76CountingSummations.solution()
+        Assertions.assertEquals(expected, actual)
+    }
 
 }
