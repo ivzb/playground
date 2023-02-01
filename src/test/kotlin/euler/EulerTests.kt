@@ -530,4 +530,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task77_prime_summations() {
+        val expected = 71
+        val actual = Task77PrimeSummations.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

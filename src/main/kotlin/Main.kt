@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task76CountingSummations
+    val task = euler.Task77PrimeSummations
 
     measure {
         println(task.name)
