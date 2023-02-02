@@ -537,4 +537,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task78_coin_partitions() {
+        val expected = 55374
+        val actual = Task78CoinPartitions.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
