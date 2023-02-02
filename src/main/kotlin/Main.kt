@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task78CoinPartitions
+    val task = euler.Task79PasscodeDerivation
 
     measure {
         println(task.name)

@@ -544,4 +544,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task79_passcode_derivation() {
+        val expected = 73162890
+        val actual = Task79PasscodeDerivation.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
