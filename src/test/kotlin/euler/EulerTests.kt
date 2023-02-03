@@ -565,4 +565,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task82_path_sum_three_ways() {
+        val expected = 260324
+        val actual = Task82PathSumThreeWays.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
