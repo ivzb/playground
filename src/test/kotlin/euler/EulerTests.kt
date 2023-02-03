@@ -551,4 +551,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task80_square_root_digital_expansion() {
+        val expected = 40886
+        val actual = Task80SquareRootDigitalExpansion.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
