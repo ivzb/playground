@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task80SquareRootDigitalExpansion
+    val task = euler.Task81PathSumTwoWays
 
     measure {
         println(task.name)

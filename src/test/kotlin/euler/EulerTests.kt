@@ -558,4 +558,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task81_path_sum_two_ways() {
+        val expected = 427337
+        val actual = Task81PathSumTwoWays.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
