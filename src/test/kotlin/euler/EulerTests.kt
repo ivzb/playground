@@ -579,4 +579,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task84_monopoly_odds() {
+        val expected = 101524
+        val actual = Task84MonopolyOdds.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

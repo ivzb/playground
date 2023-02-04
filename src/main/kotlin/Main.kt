@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task83PathSumFourWays
+    val task = euler.Task84MonopolyOdds
 
     measure {
         println(task.name)
