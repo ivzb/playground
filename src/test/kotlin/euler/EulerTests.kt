@@ -586,4 +586,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task85_counting_rectangles() {
+        val expected = 2772
+        val actual = Task85CountingRectangles.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
