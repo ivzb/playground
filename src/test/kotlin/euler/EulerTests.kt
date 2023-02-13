@@ -600,4 +600,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task87_prime_power_triples() {
+        val expected = 1097343
+        val actual = Task87PrimePowerTriples.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task86CuboidRoute
+    val task = euler.Task87PrimePowerTriples
 
     measure {
         println(task.name)
