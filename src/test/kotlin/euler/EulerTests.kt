@@ -593,4 +593,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task86_cuboid_route() {
+        val expected = 1818
+        val actual = Task86CuboidRoute.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

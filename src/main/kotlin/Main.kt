@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task85CountingRectangles
+    val task = euler.Task86CuboidRoute
 
     measure {
         println(task.name)
