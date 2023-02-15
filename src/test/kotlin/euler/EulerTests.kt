@@ -607,4 +607,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task88_product_sum_numbers() {
+        val expected = 7587457
+        val actual = Task88ProductSumNumbers.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
