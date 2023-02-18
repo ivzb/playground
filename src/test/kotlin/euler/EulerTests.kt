@@ -614,4 +614,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task89_roman_numerals() {
+        val expected = 743
+        val actual = Task89RomanNumerals.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
