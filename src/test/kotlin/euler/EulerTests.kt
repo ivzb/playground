@@ -621,4 +621,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task90_cube_digit_pairs() {
+        val expected = 1217
+        val actual = Task90CubeDigitPairs.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

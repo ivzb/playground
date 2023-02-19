@@ -100,4 +100,27 @@ object Combinatorics {
 
         return true
     }
+
+    fun <T> combinations(items: List<T>, k: Int): List<List<T>> {
+        val mp = arrayOfNulls<Any?>(k)
+        val result = ArrayList<List<T>>()
+
+        fun next(i: Int, after: Int) {
+            if (i > k) return
+
+            for (j in after + 1 .. items.size) {
+                mp[i - 1] = items[j - 1]
+
+                if (i == k) {
+                    result.add(mp.toList() as List<T>)
+                }
+
+                next(i + 1, j)
+            }
+        }
+
+        next(1, 0)
+
+        return result
+    }
 }
