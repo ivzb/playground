@@ -39,5 +39,4 @@ object Task91RightTrianglesWithIntegerCoordinates : EulerTask("Right triangles w
         return (a > 0 && b > 0 && c > 0 && (a == b + c || b == a + c || c == a + b))
     }
 
-
 }

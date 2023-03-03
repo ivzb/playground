@@ -635,4 +635,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task92_square_digit_chains() {
+        val expected = 8581146
+        val actual = Task92SquareDigitChains.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
