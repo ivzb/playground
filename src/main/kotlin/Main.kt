@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task90CubeDigitPairs
+    val task = euler.Task91RightTrianglesWithIntegerCoordinates
 
     measure {
         println(task.name)

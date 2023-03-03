@@ -628,4 +628,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task91_right_triangles_with_integer_coordinates() {
+        val expected = 14234
+        val actual = Task91RightTrianglesWithIntegerCoordinates.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
