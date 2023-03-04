@@ -642,4 +642,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task93_arithmetic_expressions() {
+        val expected = 1258
+        val actual = Task93ArithmeticExpressions.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }

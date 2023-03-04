@@ -3,7 +3,7 @@ package euler
 import EulerTask
 import utils.Bitwise.hasBit
 import utils.Bitwise.setBit
-import utils.Combinatorics.combinations
+import utils.Combinatorics.combinationsWithoutRepetition
 
 object Task90CubeDigitPairs : EulerTask("Cube digit pairs") {
 
@@ -19,7 +19,7 @@ object Task90CubeDigitPairs : EulerTask("Cube digit pairs") {
                 .map { it.map { it.digitToInt() } }
             }
 
-        val arrangements = combinations((0..9).toList(), 6).map {
+        val arrangements = combinationsWithoutRepetition((0..9).toList(), 6).map {
             it.fold(0) { arrangement, n ->
                 when {
                     it.contains(n) -> setBit(n, arrangement)

@@ -101,7 +101,7 @@ object Combinatorics {
         return true
     }
 
-    fun <T> combinations(items: List<T>, k: Int): List<List<T>> {
+    fun <T> combinationsWithoutRepetition(items: List<T>, k: Int): List<List<T>> {
         val mp = arrayOfNulls<Any?>(k)
         val result = ArrayList<List<T>>()
 
