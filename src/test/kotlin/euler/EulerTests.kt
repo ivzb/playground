@@ -649,4 +649,11 @@ class EulerTests {
         Assertions.assertEquals(expected, actual)
     }
 
+    @Test
+    fun task94_almost_equilateral_triangles() {
+        val expected = 518408346L
+        val actual = Task94AlmostEquilateralTriangles.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
 }
