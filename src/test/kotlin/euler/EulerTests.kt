@@ -588,7 +588,7 @@ class EulerTests {
 
     @Test
     fun task85_counting_rectangles() {
-        val expected = 2772
+        val expected = 2772L
         val actual = Task85CountingRectangles.solution()
         Assertions.assertEquals(expected, actual)
     }
@@ -653,6 +653,13 @@ class EulerTests {
     fun task94_almost_equilateral_triangles() {
         val expected = 518408346L
         val actual = Task94AlmostEquilateralTriangles.solution()
+        Assertions.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun task95_amicable_chains() {
+        val expected = 14316
+        val actual = Task95AmicableChains.solution()
         Assertions.assertEquals(expected, actual)
     }
 
