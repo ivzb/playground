@@ -2,7 +2,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = euler.Task95AmicableChains
+    val task = euler.Task96SuDoku
 
     measure {
         println(task.name)
