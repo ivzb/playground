@@ -7,11 +7,18 @@ import org.junit.jupiter.api.Assertions.*
 class InputTest {
 
     @Test
-    fun run() {
+    fun run2023() {
         mapOf(
-            advent_of_code._2021.Task01 to (1832 to 1858),
-            advent_of_code._2022.Task02 to (2147104 to 2044620088),
+            advent_of_code._2023.Task01 to (56108 to 55652),
+        ).forEach { task, (expectedPartA, expectedPartB) ->
+            assertEquals(expectedPartA, task.partA())
+            assertEquals(expectedPartB, task.partB())
+        }
+    }
 
+    @Test
+    fun run2022() {
+        mapOf(
             advent_of_code._2022.Task01 to (66306 to 195292),
             advent_of_code._2022.Task02 to (13446 to 13509),
             advent_of_code._2022.Task03 to (7997 to 2545),
@@ -42,6 +49,17 @@ class InputTest {
             advent_of_code._2022.Task23 to (3940 to 990),
             advent_of_code._2022.Task24 to (286 to 820),
             advent_of_code._2022.Task25 to ("2=01-0-2-0=-0==-1=01" to Unit),
+        ).forEach { task, (expectedPartA, expectedPartB) ->
+            assertEquals(expectedPartA, task.partA())
+            assertEquals(expectedPartB, task.partB())
+        }
+    }
+
+    @Test
+    fun run2021() {
+        mapOf(
+            advent_of_code._2021.Task01 to (1832 to 1858),
+            advent_of_code._2022.Task02 to (2147104 to 2044620088),
         ).forEach { task, (expectedPartA, expectedPartB) ->
             assertEquals(expectedPartA, task.partA())
             assertEquals(expectedPartB, task.partB())
