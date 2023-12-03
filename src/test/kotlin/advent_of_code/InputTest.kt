@@ -11,6 +11,7 @@ class InputTest {
         mapOf(
             advent_of_code._2023.Task01 to (56108 to 55652),
             advent_of_code._2023.Task02 to (2169 to 60948),
+            advent_of_code._2023.Task03 to (537732 to 84883664),
         ).forEach { task, (expectedPartA, expectedPartB) ->
             assertEquals(expectedPartA, task.partA())
             assertEquals(expectedPartB, task.partB())
