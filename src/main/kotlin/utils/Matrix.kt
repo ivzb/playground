@@ -72,6 +72,12 @@ object Matrix {
         return deltaX + deltaY
     }
 
+    fun manhattanDistanceLong(p1: Point, p2: Point): Long {
+        val deltaX = abs(p1.x - p2.x).toLong()
+        val deltaY = abs(p1.y - p2.y).toLong()
+        return deltaX + deltaY
+    }
+
     /**
      * Distance measured horizontally, vertically and diagonally
      * Example:

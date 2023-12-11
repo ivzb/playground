@@ -4,6 +4,23 @@ import utils.Math.factorial
 
 object Combinatorics {
 
+    inline fun <reified T> permutationPairs(elements: List<T>): List<Pair<T, T>> {
+        val permutations: HashSet<Pair<T, T>> = HashSet()
+
+        for (i in elements.indices) {
+            for (j in i + 1 until elements.size) {
+                val pair = Pair(elements[i], elements[j])
+                val reversePair = Pair(elements[j], elements[i])
+
+                if (!permutations.contains(pair) && !permutations.contains(reversePair)) {
+                    permutations.add(pair)
+                }
+            }
+        }
+
+        return permutations.toList()
+    }
+
     fun <T> permute(items: List<T>): Sequence<List<T>> = sequence {
         if (items.size == 1) {
             yield(items)
