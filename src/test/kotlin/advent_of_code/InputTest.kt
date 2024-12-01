@@ -7,6 +7,17 @@ import org.junit.jupiter.api.Assertions.*
 class InputTest {
 
     @Test
+    fun run2024() {
+        mapOf(
+            advent_of_code._2024.Task01 to (2375403 to 23082277),
+        ).forEach { task, (expectedPartA, expectedPartB) ->
+            assertEquals(expectedPartA, task.partA())
+            assertEquals(expectedPartB, task.partB())
+        }
+    }
+
+
+    @Test
     fun run2023() {
         mapOf(
             advent_of_code._2023.Task01 to (56108 to 55652),
