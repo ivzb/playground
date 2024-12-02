@@ -32,7 +32,7 @@ object Task01 : Task {
         .sum()
 
     private fun parseInput() = readInput("_2024/01")
-        .split("\n")
+        .lines()
         .map {
             it.split("   ").let { split ->
                 split[0].toInt() to split[1].toInt()

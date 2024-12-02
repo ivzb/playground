@@ -10,6 +10,7 @@ class InputTest {
     fun run2024() {
         mapOf(
             advent_of_code._2024.Task01 to (2375403 to 23082277),
+            advent_of_code._2024.Task02 to (472 to 520),
         ).forEach { task, (expectedPartA, expectedPartB) ->
             assertEquals(expectedPartA, task.partA())
             assertEquals(expectedPartB, task.partB())
