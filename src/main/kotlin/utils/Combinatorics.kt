@@ -140,4 +140,12 @@ object Combinatorics {
 
         return result
     }
+
+    fun <T> List<T>.toPairs(): Sequence<Pair<T, T>> = sequence {
+        for (i in 0 until this@toPairs.size - 1) {
+            for (j in i + 1 until this@toPairs.size) {
+                yield(this@toPairs[i] to this@toPairs[j])
+            }
+        }
+    }
 }
