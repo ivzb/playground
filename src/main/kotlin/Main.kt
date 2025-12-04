@@ -1,9 +1,9 @@
-import advent_of_code._2025.Task03
+import advent_of_code._2025.Task04
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
 fun main() {
-    val task = Task03
+    val task = Task04
 
     measure {
         task.partA()
