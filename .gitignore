@@ -45,3 +45,5 @@ bin/
 ### Advent of Code input
 /src/main/input/_*
 /src/main/kotlin/advent_of_code/_2023/TaskSample.kt
+
+.kotlin

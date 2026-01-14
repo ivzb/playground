@@ -1,12 +1,12 @@
-package leetcode.task01_TwoSum
+package leetcode
 
-class Solution {
+class Task01 {
 
     fun twoSum(nums: IntArray, target: Int): IntArray {
         return `twoSum hash table`(nums, target)
     }
 
-    fun `twoSum brute force`(nums: IntArray, target: Int): IntArray {
+    private fun `twoSum brute force`(nums: IntArray, target: Int): IntArray {
         for (i in 0 until nums.size) {
             for (j in i + 1 until nums.size) {
                 val n = nums[i]
@@ -18,10 +18,10 @@ class Solution {
             }
         }
 
-        return intArrayOf()
+        throw Exception("solution not found")
     }
 
-    fun `twoSum hash table`(nums: IntArray, target: Int): IntArray {
+    private fun `twoSum hash table`(nums: IntArray, target: Int): IntArray {
         val map = mutableMapOf<Int, Int>()
 
         for (i in nums.indices) {
@@ -37,7 +37,7 @@ class Solution {
             }
         }
 
-        return intArrayOf()
+        throw Exception("solution not found")
     }
 
 }
