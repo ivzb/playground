@@ -47,3 +47,4 @@ bin/
 /src/main/kotlin/advent_of_code/_2023/TaskSample.kt
 
 .kotlin
+*.hprof
