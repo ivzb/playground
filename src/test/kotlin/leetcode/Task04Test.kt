@@ -11,7 +11,7 @@ class Task04Test {
 
     @ParameterizedTest(name = "Test {index}: nums1={0}, nums2={1} -> expected={2}")
     @MethodSource("provideTestCases")
-    fun twoSum(
+    fun findMedianSortedArrays(
         nums1: IntArray,
         nums2: IntArray,
         expected: Double

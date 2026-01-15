@@ -11,7 +11,7 @@ class Task14Test {
 
     @ParameterizedTest(name = "Test {index}: height={0} -> expected={1}")
     @MethodSource("provideTestCases")
-    fun maxArea(
+    fun longestCommonPrefix(
         strs: Array<String>,
         expected: String,
     ) {
