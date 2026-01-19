@@ -6,7 +6,7 @@ class Task15 {
         return `threeSum two pointers`(nums)
     }
 
-    fun `threeSum two pointers`(nums: IntArray): List<List<Int>> {
+    private fun `threeSum two pointers`(nums: IntArray): List<List<Int>> {
         val sorted = nums.sorted()
         val result = HashSet<List<Int>>()
 
