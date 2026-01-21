@@ -12,7 +12,7 @@ class Task18Test {
 
     @ParameterizedTest(name = "Test {index}: nums={0} -> expected={1}")
     @MethodSource("provideTestCases")
-    fun threeSum(
+    fun fourSum(
         nums: IntArray,
         target: Int,
         expected: List<List<Int>>,
@@ -46,6 +46,12 @@ class Task18Test {
             Arguments.of(
                 intArrayOf(1000000000,1000000000,1000000000,1000000000),
                 -294967296,
+                listOf<List<Int>>(),
+            ),
+
+            Arguments.of(
+                intArrayOf(-1000000000,-1000000000,1000000000,-1000000000,-1000000000),
+                294967296,
                 listOf<List<Int>>(),
             ),
         )
