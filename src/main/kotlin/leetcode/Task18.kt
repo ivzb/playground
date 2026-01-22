@@ -97,9 +97,3 @@ class Task18 {
     }
 
 }
-
-fun main() {
-    val result = Task18().fourSum(intArrayOf(-1000000000,-1000000000,1000000000,-1000000000,-1000000000), 294967296)
-
-    println(result)
-}
