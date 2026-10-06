@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <permission
+        android:name="com.example.broadcast.permission.RECEIVE_TRIP_EVENTS"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.broadcast.permission.RECEIVE_TRIP_EVENTS" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Broadcast">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Broadcast"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".TripEndedReceiver"
+            android:exported="true"
+            android:permission="com.example.trips.permission.RECEIVE_TRIP_EVENTS">
+
+            <intent-filter>
+                <action android:name="com.example.broadcast.ACTION_TRIP_ENDED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
